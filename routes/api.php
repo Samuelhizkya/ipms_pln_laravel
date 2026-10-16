@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\TargetKpiController;
 use App\Http\Controllers\Api\TargetKpiBulananController;
 use App\Http\Controllers\Api\RealisasiKpiController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DashboardController;
 
 Route::get('/ulp', [UlpController::class, 'index']);
 
@@ -21,3 +22,5 @@ Route::get('/target-kpi-bulanan', [TargetKpiBulananController::class, 'index']);
 
 Route::get('/realisasi-kpi', [RealisasiKpiController::class, 'index']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
