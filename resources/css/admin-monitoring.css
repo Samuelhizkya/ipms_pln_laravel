@@ -1,0 +1,238 @@
+.mon-page{--mon-deep:#125D72;--mon-cyan:#14A2BA;--mon-green:#237A34;--mon-yellow:#F39C12;--mon-red:#E03E3E;--mon-muted:#64748B;--mon-border:#E2EAF0;color:#193747;font-family:Inter,Arial,sans-serif;max-width:1600px;margin:0 auto;padding:0 0 30px}
+.mon-page *{box-sizing:border-box}.mon-page button,.mon-page h1,.mon-page h2,.mon-page h3{font-family:Poppins,Inter,Arial,sans-serif}.mon-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}.mon-heading h1{font-size:27px;color:var(--mon-deep);font-weight:700;margin:0}.mon-heading p{color:var(--mon-muted);font-size:13px;margin:6px 0 0}.mon-demo-mark{font-size:11px;background:#FFF4D7;color:#8F6300;padding:9px 12px;border-radius:9px;border:1px solid #FCE5AF}
+.mon-panel{background:#fff;border:1px solid var(--mon-border);border-radius:15px;padding:21px;box-shadow:0 3px 16px rgba(18,93,114,.04);margin-bottom:20px;min-width:0}.mon-panel-title{font-size:15px;font-weight:700;color:var(--mon-deep);margin:0 0 17px;display:flex;align-items:center;gap:9px}.mon-panel-title svg{width:19px;height:19px;color:var(--mon-cyan)}
+.mon-filters{display:grid;grid-template-columns:1.65fr 1fr .85fr 1.2fr;gap:14px}.mon-field label{font-size:12px;color:var(--mon-deep);font-weight:600;display:block;margin-bottom:7px}.mon-field select,.mon-search{width:100%;height:43px;background:#fff;border:1px solid #DCE7ED;border-radius:9px;padding:0 12px;color:#334155;font-size:12px;outline:none}.mon-field select:focus,.mon-search:focus{border-color:var(--mon-cyan);box-shadow:0 0 0 3px rgba(20,162,186,.1)}.mon-filter-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:17px}.mon-btn{border:0;background:var(--mon-cyan);color:white;font-size:12px;font-weight:600;border-radius:9px;min-height:40px;padding:10px 17px;cursor:pointer}.mon-btn:hover{background:var(--mon-deep)}.mon-btn-outline{background:#fff;color:var(--mon-deep);border:1px solid #CDE2E9}.mon-btn-outline:hover{background:#F1FAFC}.mon-btn-small{min-height:31px;padding:6px 11px;font-size:11px}
+.mon-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:20px}.mon-summary-card{background:#fff;border:1px solid var(--mon-border);border-radius:14px;padding:19px;display:flex;justify-content:space-between;gap:9px;min-height:125px}.mon-summary-card small{display:block;color:var(--mon-muted);font-size:12px}.mon-summary-card strong{display:block;font-size:30px;color:var(--mon-deep);margin-top:8px}.mon-summary-card span{font-size:10px;color:var(--mon-muted)}.mon-summary-icon{display:grid;place-items:center;width:41px;height:41px;flex-shrink:0;border-radius:10px;background:#E4F5F9;color:var(--mon-cyan)}.mon-summary-icon.green{background:#E6F6EA;color:var(--mon-green)}.mon-summary-icon.yellow{background:#FFF4D8;color:#B57B00}.mon-summary-icon.red{background:#FDEAEA;color:var(--mon-red)}.mon-summary-icon svg{width:21px;height:21px}
+.mon-section-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:15px}.mon-section-top .mon-panel-title{margin:0}.mon-search{max-width:270px}.mon-caption{font-size:11px;color:var(--mon-muted);line-height:1.65;margin:8px 0 0}.mon-table-scroll{overflow-x:auto}.mon-table{border-collapse:collapse;width:100%;min-width:1010px;font-size:12px}.mon-table thead th{background:var(--mon-cyan);color:white;font-size:11px;text-align:left;font-weight:600;padding:14px 12px;white-space:nowrap}.mon-table thead th:first-child{border-radius:8px 0 0 0}.mon-table thead th:last-child{border-radius:0 8px 0 0}.mon-table tbody td{padding:13px 12px;border-bottom:1px solid #E9F0F3;color:#415467;vertical-align:middle}.mon-table tbody tr:hover{background:#F3FBFC}.mon-code{font-size:10px;color:#7B8A99}.mon-kpi-name{color:var(--mon-deep);font-weight:600;max-width:220px;line-height:1.5}.mon-progress{min-width:104px;display:flex;align-items:center;gap:6px}.mon-progress-track{height:6px;width:53px;flex-shrink:0;border-radius:10px;background:#E7EDF1;overflow:hidden}.mon-progress-bar{display:block;height:100%;border-radius:10px}.mon-status{display:inline-block;border-radius:20px;padding:6px 9px;font-size:10px;white-space:nowrap;font-weight:600}.mon-status.achieved{background:#E4F6EA;color:#237A34}.mon-status.warning{background:#FFF4D7;color:#A76E00}.mon-status.danger{background:#FDEAEA;color:#D93939}.mon-table-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px;font-size:11px;color:var(--mon-muted)}.mon-pages{display:flex;gap:5px;align-items:center}.mon-pages button{border:1px solid var(--mon-border);border-radius:7px;background:#fff;min-width:32px;height:32px;color:var(--mon-deep);cursor:pointer}.mon-pages button:disabled{opacity:.35;cursor:not-allowed}.mon-pages button.active{color:#fff;background:var(--mon-deep)}.mon-empty{padding:38px;text-align:center;color:var(--mon-muted)}
+.mon-modal[hidden]{display:none!important}.mon-modal{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}.mon-modal-backdrop{position:absolute;inset:0;background:rgba(13,37,47,.6)}.mon-modal-dialog{position:relative;width:min(780px,100%);max-height:90vh;overflow:auto;background:white;border-radius:17px;padding:25px;box-shadow:0 22px 70px rgba(0,0,0,.22)}.mon-modal-header{display:flex;justify-content:space-between;align-items:start;gap:15px;border-bottom:1px solid #E6EDF1;padding-bottom:17px}.mon-modal-header h2{font-size:19px;color:var(--mon-deep);margin:0 0 5px}.mon-modal-header p{font-size:12px;color:var(--mon-muted);margin:0}.mon-close{border:none;background:#F0F5F7;color:#475569;border-radius:8px;width:34px;height:34px;font-size:22px;cursor:pointer;flex-shrink:0}.mon-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:18px 0}.mon-detail-box{background:#F3F9FB;border:1px solid #E2EDF1;border-radius:10px;padding:13px}.mon-detail-box small{font-size:11px;color:var(--mon-muted);display:block;margin-bottom:7px}.mon-detail-box strong{font-size:17px;color:var(--mon-deep);overflow-wrap:anywhere}.mon-history-title{font-size:14px;font-weight:700;color:var(--mon-deep);margin:14px 0}.mon-history{display:flex;align-items:end;gap:12px;min-height:175px;border-bottom:1px solid #CBDDE5;padding:8px 8px 0}.mon-history-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:end;gap:5px;min-width:0}.mon-history-number{font-size:10px;color:var(--mon-deep);font-weight:600}.mon-history-bar{width:min(64px,80%);min-height:3px;background:var(--mon-cyan);border-radius:6px 6px 0 0}.mon-history-month{font-size:10px;color:var(--mon-muted);margin:8px 0}.mon-detail-note{font-size:11px;color:var(--mon-muted);line-height:1.7;margin:14px 0 0}.mon-modal-footer{text-align:right;margin-top:17px}
+@media(max-width:1100px){.mon-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.mon-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.mon-heading h1{font-size:21px}.mon-filters,.mon-summary{grid-template-columns:1fr}.mon-panel{padding:15px}.mon-section-top{align-items:stretch}.mon-search{max-width:none}.mon-detail-grid{grid-template-columns:1fr 1fr}.mon-modal-dialog{padding:17px}}
+
+/* PENYESUAIAN FINAL: KARTU GRADASI TANPA FOTO */
+.mon-page .mon-summary-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 185px;
+    padding: 22px;
+    border: 0;
+    border-radius: 15px;
+    background: linear-gradient(120deg, #125D72 0%, #148BA1 42%, #14A2BA 100%);
+    box-shadow: 0 6px 19px rgba(18,93,114,.12);
+    transition: transform .2s, box-shadow .2s;
+}
+.mon-page .mon-summary-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg,rgba(18,93,114,.26),rgba(20,162,186,.03));
+    pointer-events: none;
+}
+.mon-page .mon-summary-card:hover {transform:translateY(-3px);box-shadow:0 10px 24px rgba(18,93,114,.19)}
+.mon-page .mon-summary-card small {color:#E7F6F9;font-size:12px;font-weight:500}
+.mon-page .mon-summary-card strong {font-size:35px;line-height:1.2;color:#FFFFFF;margin-top:14px;font-weight:700}
+.mon-page .mon-summary-card span {display:block;color:#E7F6F9;font-size:10px;line-height:1.6;margin-top:13px}
+.mon-page .mon-summary-icon,
+.mon-page .mon-summary-icon.green,
+.mon-page .mon-summary-icon.yellow,
+.mon-page .mon-summary-icon.red {
+    width:43px;height:43px;border-radius:11px;
+    background:rgba(255,255,255,.17);
+    color:#FFFFFF;
+}
+.mon-page .mon-summary-icon.green {color:#C2FFD2}
+.mon-page .mon-summary-icon.yellow {color:#FFF3A0}
+.mon-page .mon-summary-icon.red {color:#FFD8D8}
+.mon-page .mon-summary-icon svg {width:22px;height:22px}
+/* PENYESUAIAN FINAL: MODAL LEBIH LEBAR, LATAR BELAKANG LEBIH TERTUTUP */
+.mon-modal {padding:18px;z-index:99999}
+.mon-modal-backdrop {background:rgba(13,37,47,.83);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.mon-modal-dialog {
+    width:min(1180px,calc(100vw - 36px));
+    max-width:1180px;
+    max-height:92vh;
+    background:#FFFFFF;
+    border-radius:19px;
+    padding:30px;
+    box-shadow:0 24px 70px rgba(0,0,0,.28);
+}
+@media (max-width:600px) {
+    .mon-modal {padding:10px}
+    .mon-modal-dialog {width:calc(100vw - 20px);padding:18px;max-height:94vh}
+}
+/* Tombol Monitoring mengikuti Realisasi KPI. */
+.mon-page .mon-btn,
+.mon-modal .mon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 10px 16px;
+    border: 1px solid #125d72;
+    border-radius: 8px;
+    background: #125d72;
+    color: #fff;
+    font-family: var(--font-utama, 'Poppins', sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: none;
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
+}
+
+.mon-page .mon-btn:hover:not(:disabled),
+.mon-modal .mon-btn:hover:not(:disabled) {
+    background: #14a2ba;
+    border-color: #14a2ba;
+    color: #fff;
+}
+
+.mon-page .mon-btn:active:not(:disabled),
+.mon-modal .mon-btn:active:not(:disabled) {
+    background: #125d72;
+    border-color: #125d72;
+}
+
+/* Reset dan Tutup Detail mengikuti tombol Download. */
+.mon-page .mon-btn.mon-btn-outline,
+.mon-modal .mon-btn.mon-btn-outline {
+    background: #e7f6f9;
+    border-color: #b8dde5;
+    color: #125d72;
+}
+
+.mon-page .mon-btn.mon-btn-outline:hover:not(:disabled),
+.mon-modal .mon-btn.mon-btn-outline:hover:not(:disabled) {
+    background: #d5edf2;
+    border-color: #125d72;
+    color: #125d72;
+}
+
+.mon-page .mon-btn.mon-btn-outline:active:not(:disabled),
+.mon-modal .mon-btn.mon-btn-outline:active:not(:disabled) {
+    background: #c9e7ed;
+    border-color: #125d72;
+}
+
+/* Detail pada tabel mengikuti tombol Edit. */
+.mon-page .mon-btn.mon-btn-small {
+    min-height: 36px;
+    padding: 8px 12px;
+    border-color: #b8dde5;
+    border-radius: 8px;
+    background: #fff;
+    color: #125d72;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.mon-page .mon-btn.mon-btn-small:hover:not(:disabled) {
+    background: #e7f6f9;
+    border-color: #125d72;
+}
+
+.mon-page .mon-btn:focus-visible,
+.mon-modal .mon-btn:focus-visible,
+.mon-pages button:focus-visible,
+.mon-close:focus-visible {
+    outline: 2px solid #14a2ba;
+    outline-offset: 2px;
+}
+
+.mon-page .mon-btn:disabled,
+.mon-modal .mon-btn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.mon-filter-actions {
+    flex-wrap: wrap;
+}
+
+.mon-pages button {
+    border: 1px solid #b8dde5;
+    border-radius: 8px;
+    background: #fff;
+    color: #125d72;
+    font-family: var(--font-utama, 'Poppins', sans-serif);
+}
+
+.mon-pages button:hover:not(:disabled) {
+    background: #e7f6f9;
+    border-color: #125d72;
+}
+
+.mon-pages button.active {
+    background: #125d72;
+    border-color: #125d72;
+    color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mon-page .mon-btn,
+    .mon-modal .mon-btn {
+        transition: none;
+    }
+}
+
+/* Detail tampil di area konten, tanpa popup. */
+#monitoringKpiPage[hidden],
+.mon-detail-page[hidden] {
+    display: none !important;
+}
+
+.mon-detail-page {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto 20px;
+    padding: 24px;
+}
+
+.mon-detail-page-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e4edf2;
+}
+
+.mon-detail-page-heading h2 {
+    margin: 0 0 8px;
+    color: #125d72;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.mon-detail-page-status {
+    margin-top: 20px;
+}
+
+.mon-detail-page .mon-detail-grid {
+    margin: 20px 0;
+}
+
+.mon-detail-page .mon-modal-footer {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e4edf2;
+}
+
+@media (max-width: 600px) {
+    .mon-detail-page {
+        padding: 18px;
+    }
+
+    .mon-detail-page-heading h2 {
+        font-size: 18px;
+    }
+}

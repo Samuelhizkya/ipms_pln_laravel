@@ -1,0 +1,835 @@
+.realisasi-workspace {
+    min-width: 0;
+}
+
+.realisasi-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 14px;
+}
+
+.realisasi-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 110px;
+}
+
+.realisasi-search-field {
+    flex: 1;
+    min-width: 240px;
+}
+
+.realisasi-field label,
+.realisasi-pagination label {
+    color: #475569;
+    font-family: var(--font-data);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.realisasi-field input,
+.realisasi-field select,
+.realisasi-pagination select {
+    min-height: 36px;
+    padding: 8px 10px;
+    border: 1px solid #DDE4EA;
+    border-radius: 6px;
+    background: #FFFFFF;
+    color: #334155;
+    font-size: 12px;
+}
+
+.realisasi-field select:disabled {
+    background: #F4F6F9;
+    opacity: 1;
+}
+
+.realisasi-message {
+    margin: 18px 0;
+    color: #64748B;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.realisasi-message.is-error {
+    padding: 12px;
+    border-radius: 6px;
+    background: #FEE2E2;
+    color: #B91C1C;
+}
+
+.realisasi-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+}
+
+.realisasi-table {
+    min-width: 1250px;
+}
+
+.realisasi-table th {
+    white-space: nowrap;
+}
+
+.realisasi-table td {
+    vertical-align: top;
+}
+
+.realisasi-table td:nth-child(3) {
+    min-width: 250px;
+    line-height: 1.6;
+}
+
+.realisasi-supporting {
+    display: block;
+    margin-top: 5px;
+    color: #64748B;
+    font-size: 11px;
+}
+
+.ipms-app .page-content .realisasi-number {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.ipms-app .page-content .realisasi-empty {
+    padding: 32px 16px;
+    color: #64748B;
+    text-align: center;
+}
+
+.realisasi-table tbody tr:hover {
+    background: #F8FCFD;
+}
+
+.realisasi-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 18px;
+    color: #64748B;
+    font-size: 12px;
+}
+
+.realisasi-pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.realisasi-button {
+    min-width: 34px;
+    min-height: 36px;
+    padding: 7px 11px;
+    border: 1px solid #DDE4EA;
+    border-radius: 6px;
+    background: #FFFFFF;
+    color: #125D72;
+    font-size: 12px;
+}
+
+.realisasi-button:hover:not(:disabled) {
+    border-color: #14A2BA;
+    background: #E7F6F9;
+}
+
+.realisasi-button:disabled {
+    opacity: 0.45;
+}
+
+.realisasi-badge {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 20px;
+    background: #F1F5F9;
+    color: #475569;
+    font-size: 11px;
+}
+
+.realisasi-badge.is-valid {
+    background: #DCFCE7;
+    color: #237A34;
+}
+
+.realisasi-badge.is-draft {
+    background: #FEF9C3;
+    color: #854D0E;
+}
+
+.realisasi-badge.is-error {
+    background: #FEE2E2;
+    color: #B91C1C;
+}
+
+@media (max-width: 600px) {
+    .realisasi-field {
+        flex: 1 1 140px;
+    }
+
+    .realisasi-search-field {
+        flex-basis: 100%;
+    }
+}
+/* Form impor realisasi */
+
+.realisasi-upload {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.realisasi-upload-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.realisasi-upload-heading h2 {
+    margin: 0 0 8px;
+    color: #125D72;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.realisasi-upload-heading p {
+    margin: 0;
+    color: #64748B;
+    font-size: 13px;
+}
+
+a.realisasi-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.realisasi-upload-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.realisasi-upload .realisasi-field small {
+    color: #64748B;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.realisasi-upload input[readonly] {
+    background: #F4F6F9;
+}
+
+.realisasi-upload-file {
+    margin-top: 24px;
+}
+
+.realisasi-upload-file input {
+    width: 100%;
+    padding: 16px;
+    border: 1px dashed #94A3B8;
+    background: #F8FAFC;
+}
+
+.realisasi-upload-file input::file-selector-button {
+    margin-right: 12px;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 5px;
+    background: #E7F6F9;
+    color: #125D72;
+    cursor: pointer;
+}
+
+.realisasi-upload-note {
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #E7F6F9;
+    color: #125D72;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.realisasi-upload-note p {
+    margin: 0;
+}
+
+.realisasi-upload-note p + p {
+    margin-top: 8px;
+}
+
+.realisasi-upload-alert {
+    margin-bottom: 20px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.realisasi-upload-alert p {
+    margin: 0;
+}
+
+.realisasi-upload-alert ul {
+    margin: 8px 0;
+    padding-left: 20px;
+    list-style: disc;
+}
+
+.realisasi-upload-alert.is-success {
+    background: #DCFCE7;
+    color: #166534;
+}
+
+.realisasi-upload-alert.is-error {
+    background: #FEE2E2;
+    color: #B91C1C;
+}
+
+.realisasi-upload-alert a {
+    display: inline-block;
+    margin-top: 8px;
+    color: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.realisasi-upload-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.realisasi-button.realisasi-upload-submit {
+    border-color: #005B94;
+    background: #005B94;
+    color: #FFFFFF;
+}
+
+.realisasi-button.realisasi-upload-submit:hover:not(:disabled) {
+    border-color: #125D72;
+    background: #125D72;
+}
+
+.realisasi-upload-client-message {
+    margin-top: 14px;
+    color: #64748B;
+    font-size: 12px;
+}
+
+.realisasi-upload-client-message.is-error {
+    color: #B91C1C;
+}
+
+@media (max-width: 600px) {
+    .realisasi-upload-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.realisasi-file-feedback {
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    border: 1px solid #D8E7F2;
+    border-radius: 8px;
+    background: #F1F7FC;
+    color: #005B94;
+    font-family: var(--font-data, 'Inter', sans-serif);
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.realisasi-file-feedback[data-state="error"] {
+    border-color: #F2C7C7;
+    background: #FFF3F3;
+    color: #A12626;
+}
+
+.realisasi-file-feedback[data-state="loading"] {
+    border-color: #E9D98B;
+    background: #FFFBE8;
+    color: #705B12;
+}
+
+form[aria-busy="true"] button[type="submit"],
+form[aria-busy="true"] input[type="submit"] {
+    opacity: 0.7;
+    cursor: wait;
+}
+/* Gaya tombol asli teman 2, dibatasi pada halaman ini. */
+/* Pilihan unduhan tabel */
+#realisasi-workspace .kpi-export-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+
+#realisasi-workspace .kpi-export-menu {
+    position: relative;
+}
+
+#realisasi-workspace .kpi-export-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 40px;
+    padding: 10px 16px;
+    border: 1px solid #005B94;
+    border-radius: 8px;
+    background: #005B94;
+    color: #ffffff;
+    font-family: var(--font-utama, 'Poppins', sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#realisasi-workspace .kpi-export-trigger:hover:not(:disabled) {
+    background: #004A79;
+}
+
+#realisasi-workspace .kpi-export-trigger:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+#realisasi-workspace .kpi-export-options {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 30;
+    width: 190px;
+    padding: 6px;
+    border: 1px solid #DDE4EA;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgb(15 23 42 / 12%);
+}
+
+#realisasi-workspace .kpi-export-options[hidden] {
+    display: none !important;
+}
+
+#realisasi-workspace .kpi-export-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 11px 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #334155;
+    text-align: left;
+    font-family: var(--font-data, 'Inter', sans-serif);
+    font-size: 13px;
+}
+
+#realisasi-workspace .kpi-export-option:hover {
+    background: #F0F7FB;
+    color: #005B94;
+}
+
+#realisasi-workspace .kpi-export-format {
+    min-width: 40px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+#realisasi-workspace .kpi-export-format.is-pdf {
+    color: #B42318;
+}
+
+#realisasi-workspace .kpi-export-format.is-xlsx {
+    color: #237A34;
+}
+/* Tindakan halaman KPI: warna mengikuti palet sidebar */
+#realisasi-workspace .kpi-page-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#realisasi-workspace .kpi-page-actions .kpi-export-bar {
+    display: flex;
+    margin: 0;
+}
+
+#realisasi-workspace .kpi-page-actions .kpi-action-import,
+#realisasi-workspace .kpi-page-actions .kpi-export-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 10px 16px;
+    border: 1px solid #125D72;
+    border-radius: 8px;
+    font-family: var(--font-utama, 'Poppins', sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-decoration: none;
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
+}
+
+/* Impor: tindakan utama */
+#realisasi-workspace .kpi-page-actions .kpi-action-import {
+    background: #125D72;
+    color: #ffffff;
+}
+
+#realisasi-workspace .kpi-page-actions .kpi-action-import:hover {
+    background: #14A2BA;
+    border-color: #14A2BA;
+    color: #ffffff;
+}
+
+/* Download: tindakan pendamping */
+#realisasi-workspace .kpi-page-actions .kpi-export-trigger {
+    background: #E7F6F9;
+    border-color: #B8DDE5;
+    color: #125D72;
+}
+
+#realisasi-workspace .kpi-page-actions .kpi-export-trigger:hover:not(:disabled) {
+    background: #D5EDF2;
+    border-color: #125D72;
+    color: #125D72;
+}
+
+#realisasi-workspace .kpi-page-actions .kpi-export-trigger:disabled {
+    background: #F1F3F5;
+    border-color: #DDE4EA;
+    color: #8A969F;
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+#realisasi-workspace .kpi-page-actions .kpi-action-import svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+}
+
+#realisasi-workspace .kpi-export-options {
+    border-color: #DDE4EA;
+    background: #ffffff;
+}
+
+#realisasi-workspace .kpi-export-option:hover,
+#realisasi-workspace .kpi-export-option:focus-visible {
+    background: #E7F6F9;
+    color: #125D72;
+}
+
+#realisasi-workspace .kpi-export-options .kpi-export-format.is-pdf,
+#realisasi-workspace .kpi-export-options .kpi-export-format.is-xlsx {
+    color: #125D72;
+}
+
+/* Samakan warna bagian atas kartu profil */
+
+@media (max-width: 640px) {
+    #realisasi-workspace .kpi-page-actions {
+        gap: 8px;
+    }
+
+    #realisasi-workspace .kpi-page-actions .kpi-action-import,
+    #realisasi-workspace .kpi-page-actions .kpi-export-trigger {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+}
+
+#realisasi-workspace .realisasi-edit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 36px;
+    padding: 8px 14px;
+    border: 1px solid #c9dfe4;
+    border-radius: 7px;
+    background: #fff;
+    color: #125d72;
+    font-family: var(--font-utama, 'Poppins', sans-serif);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Panel dan tabel: mengikuti tampilan sebelum integrasi. */
+#realisasi-workspace.card { padding:20px; border:1px solid #DDE4EA; border-radius:10px; background:#FFFFFF; box-shadow:none; font-family:var(--font-data, 'Inter', sans-serif); color:#334155; font-size:12px; line-height:1.5; }
+#realisasi-workspace table {width:100%;border-collapse:collapse;font-family:var(--font-data, 'Inter', sans-serif);font-variant-numeric:tabular-nums;}
+#realisasi-workspace thead th {padding:12px;background:#E7F6F9;color:#125D72;font-family:var(--font-utama, 'Poppins', sans-serif);font-size:12px;font-weight:500;text-align:left;}
+#realisasi-workspace tbody td {padding:12px;border-bottom:1px solid #E8EDF2;font-size:12px;color:#334155;}
+#realisasi-workspace label, #realisasi-workspace input, #realisasi-workspace select {font-family:var(--font-data, 'Inter', sans-serif);}
+#realisasi-workspace input, #realisasi-workspace select {min-height:36px;padding:8px 10px;border:1px solid #DDE4EA;border-radius:6px;background:#FFFFFF;color:#334155;font-size:12px;}
+#realisasi-workspace input:focus-visible, #realisasi-workspace select:focus-visible, #realisasi-workspace button:focus-visible, #realisasi-workspace a:focus-visible {outline:2px solid #14A2BA;outline-offset:2px;}
+#realisasi-workspace .kpi-page-actions .kpi-export-trigger svg {width:17px;height:17px;flex-shrink:0;}
+@media(max-width:600px){#realisasi-workspace.card{padding:16px;} #realisasi-workspace .kpi-page-actions {width:100%;}}
+
+/* Halaman Edit Realisasi KPI */
+.realisasi-edit-card {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 28px;
+    border: 1px solid #dceaf0;
+    border-radius: 16px;
+    background: #fff;
+    color: #125d72;
+    font-family: var(--font-utama, 'Poppins', sans-serif);
+}
+
+.realisasi-edit-card,
+.realisasi-edit-card * {
+    box-sizing: border-box;
+}
+
+.realisasi-edit-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #e4edf2;
+}
+
+.realisasi-edit-heading h2 {
+    margin: 0 0 8px;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.realisasi-edit-heading p {
+    margin: 0;
+    color: #71869a;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.realisasi-edit-context {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.realisasi-edit-context > div {
+    min-width: 0;
+    padding: 16px 18px;
+    border: 1px solid #dceaf0;
+    border-radius: 10px;
+    background: #f4fafc;
+}
+
+.realisasi-edit-context dt {
+    margin-bottom: 7px;
+    color: #71869a;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.realisasi-edit-context dd {
+    margin: 0;
+    color: #125d72;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.realisasi-edit-card .realisasi-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 24px;
+}
+
+.realisasi-edit-card .realisasi-field label {
+    margin: 0;
+    color: #125d72;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.realisasi-edit-card .realisasi-field input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #cfe1e8;
+    border-radius: 10px;
+    background: #fff;
+    color: #125d72;
+    font: inherit;
+    font-size: 14px;
+}
+
+.realisasi-edit-card .realisasi-field input:focus {
+    outline: 2px solid #14a2ba;
+    outline-offset: 2px;
+    border-color: #14a2ba;
+}
+
+.realisasi-edit-card .realisasi-field input[aria-invalid="true"] {
+    border-color: #c43c3c;
+}
+
+.realisasi-edit-card .realisasi-field small {
+    color: #71869a;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.realisasi-edit-note {
+    margin: 20px 0 0;
+    padding: 14px 16px;
+    border-left: 3px solid #14a2ba;
+    border-radius: 8px;
+    background: #eaf7fa;
+    color: #386578;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.realisasi-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid #e4edf2;
+}
+
+.realisasi-edit-card .realisasi-edit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 10px 16px;
+    border: 1px solid #b8dde5;
+    border-radius: 8px;
+    background: #e7f6f9;
+    color: #125d72;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease;
+}
+
+.realisasi-edit-card .realisasi-edit-button:hover:not(:disabled) {
+    border-color: #125d72;
+    background: #d5edf2;
+}
+
+.realisasi-edit-card .realisasi-edit-button.is-primary {
+    border-color: #125d72;
+    background: #125d72;
+    color: #fff;
+}
+
+.realisasi-edit-card .realisasi-edit-button.is-primary:hover:not(:disabled) {
+    border-color: #14a2ba;
+    background: #14a2ba;
+}
+
+.realisasi-edit-card .realisasi-edit-button:focus-visible {
+    outline: 2px solid #14a2ba;
+    outline-offset: 2px;
+}
+
+.realisasi-edit-card .realisasi-edit-button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.realisasi-edit-error {
+    margin: 0;
+    color: #b93838;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.realisasi-edit-conflict {
+    margin: 20px 0;
+    padding: 16px;
+    border: 1px solid #efc3c3;
+    border-radius: 10px;
+    background: #fff2f2;
+    color: #9f3030;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.realisasi-edit-conflict p {
+    margin: 0 0 8px;
+}
+
+.realisasi-edit-conflict a {
+    color: #9f3030;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+    .realisasi-edit-card {
+        padding: 20px;
+    }
+
+    .realisasi-edit-context {
+        grid-template-columns: 1fr;
+    }
+
+    .realisasi-edit-heading h2 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .realisasi-edit-actions {
+        flex-direction: column-reverse;
+    }
+
+    .realisasi-edit-actions .realisasi-edit-button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .realisasi-edit-card .realisasi-edit-button {
+        transition: none;
+    }
+}

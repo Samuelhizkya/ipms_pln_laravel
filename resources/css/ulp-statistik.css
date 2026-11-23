@@ -1,0 +1,276 @@
+.us-page {
+    color: #125d72;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+.us-page * {
+    box-sizing: border-box;
+}
+
+.us-panel {
+    padding: 24px;
+    margin-bottom: 22px;
+    border: 1px solid #dfeaf0;
+    border-radius: 18px;
+    background: #fff;
+}
+
+.us-page h2 {
+    margin: 0 0 12px;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.us-note {
+    color: #71869a;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.us-filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    align-items: end;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.us-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.us-field select,
+.us-unit {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid #d4e4ec;
+    border-radius: 10px;
+    color: #125d72;
+    background: #fff;
+    font: inherit;
+    font-size: 13px;
+}
+
+.us-unit {
+    background: #f4fafc;
+}
+
+/* Tombol mengikuti Impor Excel pada Realisasi KPI. */
+.us-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 40px;
+    padding: 10px 16px;
+
+    border: 1px solid #125d72;
+    border-radius: 8px;
+
+    background: #125d72;
+    color: #fff;
+
+    font-family: var(--font-utama, 'Poppins', sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
+}
+
+.us-button:hover:not(:disabled) {
+    background: #14a2ba;
+    border-color: #14a2ba;
+    color: #fff;
+}
+
+.us-button:active:not(:disabled) {
+    background: #125d72;
+    border-color: #125d72;
+}
+
+.us-button:focus-visible {
+    outline: 2px solid #14a2ba;
+    outline-offset: 2px;
+}
+
+.us-button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.us-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.us-card {
+    padding: 24px;
+    border-radius: 16px;
+    background: linear-gradient(120deg, #156278, #14a2ba);
+    color: #fff;
+}
+
+.us-label {
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.us-value {
+    margin: 12px 0;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.us-caption {
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.us-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.us-status-row {
+    margin-top: 22px;
+}
+
+.us-status-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 9px;
+    font-size: 13px;
+}
+
+.us-track {
+    height: 13px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #edf3f6;
+}
+
+.us-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: #14a2ba;
+}
+
+.us-table-wrap {
+    overflow-x: auto;
+    margin-top: 18px;
+}
+
+.us-table {
+    width: 100%;
+    min-width: 460px;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.us-table th {
+    padding: 14px 12px;
+    background: #e6f5f8;
+    text-align: left;
+    font-weight: 600;
+}
+
+.us-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #e4edf2;
+    line-height: 1.7;
+}
+
+.us-entry {
+    padding: 18px 0;
+    border-bottom: 1px solid #e4edf2;
+}
+
+.us-entry-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.us-entry-value {
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.us-empty {
+    padding: 24px 0;
+    text-align: center;
+    color: #71869a;
+    font-size: 13px;
+}
+
+@media (max-width: 1100px) {
+    .us-cards,
+    .us-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .us-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .us-cards,
+    .us-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .us-panel {
+        padding: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .us-button {
+        transition: none;
+    }
+}
+/* Isi Statistik ULP mengikuti Flutter, dengan desain Laravel yang sama. */
+.us-flutter-statistics h2 { display: flex; align-items: center; gap: 9px; }
+.us-flutter-statistics h2 svg { width: 20px; height: 20px; color: #14a2ba; flex-shrink: 0; }
+.us-flutter-statistics .us-summary-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.us-flutter-statistics .us-current-mean { font-size: 22px; font-weight: 700; color: #125d72; margin: 10px 0 15px; }
+.us-flutter-statistics .us-chart-scroll { width: 100%; overflow-x: auto; margin-top: 16px; }
+.us-flutter-statistics .us-monthly-svg { width: 100%; min-width: 550px; display: block; }
+.us-flutter-statistics .us-comparison-svg { min-width: 760px; }
+.us-flutter-statistics .us-svg-grid { stroke: #e4edf2; stroke-width: 1; }
+.us-flutter-statistics .us-svg-reference { stroke: #97a8b5; stroke-width: 1.5; stroke-dasharray: 6 5; }
+.us-flutter-statistics .us-svg-label { fill: #71869a; font: 12px Inter, Arial, sans-serif; }
+.us-flutter-statistics .us-svg-value { fill: #125d72; font: 600 11px Inter, Arial, sans-serif; }
+.us-flutter-statistics .us-svg-trend { stroke: #125d72; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.us-flutter-statistics .us-svg-point { fill: #125d72; stroke: white; stroke-width: 1.5; }
+.us-flutter-statistics .us-svg-bar { fill: #14a2ba; }
+.us-flutter-statistics .us-donut { width: 210px; height: 210px; border-radius: 50%; display: grid; place-items: center; margin: 25px auto; }
+.us-flutter-statistics .us-donut-center { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 166px; height: 166px; background: white; border-radius: 50%; }
+.us-flutter-statistics .us-donut-center strong { color: #125d72; font-size: 30px; }
+.us-flutter-statistics .us-donut-center small { color: #71869a; font-size: 12px; margin-top: 4px; }
+.us-flutter-statistics .us-donut-legend { margin: 15px 0; }
+.us-flutter-statistics .us-donut-legend-row { display: grid; grid-template-columns: 10px 1fr auto; gap: 9px; align-items: center; margin: 16px 0; font-size: 12px; }
+.us-flutter-statistics .us-donut-legend-row i { width: 10px; height: 10px; border-radius: 50%; }
+.us-flutter-statistics .us-donut-legend-row strong { white-space: nowrap; }
+@media (max-width: 600px) { .us-flutter-statistics .us-summary-two { grid-template-columns: 1fr; } }

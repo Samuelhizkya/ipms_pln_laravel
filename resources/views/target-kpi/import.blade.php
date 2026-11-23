@@ -1,117 +1,21 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@extends('layouts.app')
 
-    <title>Import Target KPI - IPMS PLN</title>
+@section('title', 'Impor Target KPI')
+@section('navbar-title', 'Impor Target KPI')
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fa;
-            margin: 0;
-            padding: 40px;
-        }
+@section('content')
+    <section class="card target-import-card">
+        <div class="target-import-header">
+            <h2>Impor Target KPI</h2>
+            <p>
+                Pilih ULP tujuan dan tahun, kemudian unggah file target KPI.
+            </p>
+        </div>
 
-        .container {
-            max-width: 800px;
-            margin: auto;
-        }
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-
-        h1 {
-            margin-top: 0;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        select,
-        input[type="number"],
-        input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background: #0066cc;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .success {
-            background: #d1fae5;
-            color: #065f46;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .error {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .error ul {
-            margin-bottom: 0;
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="container">
-
-    <div class="card">
-
-        <h1>Import Target KPI</h1>
-
-        @if(session('success'))
-            <div class="success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if(session('import_errors'))
-            <div class="error">
-                <strong>Import gagal karena terdapat kesalahan:</strong>
-
-                <ul>
-                    @foreach(session('import_errors') as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        @if($errors->any())
-            <div class="error">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        @if ($ulps->isEmpty())
+            <div class="target-import-alert target-import-alert-error" role="alert">
+                Belum ada ULP aktif. Impor tidak dapat dilakukan.
             </div>
         @endif
 
@@ -120,69 +24,106 @@
             method="POST"
             enctype="multipart/form-data"
         >
-
             @csrf
 
-            <div class="form-group">
-                <label for="id_ulp">ULP</label>
+            <div class="target-import-field">
+                <label for="target-import-ulp">ULP Tujuan</label>
 
-                <select name="id_ulp" id="id_ulp" required>
+                <select
+                    id="target-import-ulp"
+                    name="id_ulp"
+                    required
+                    @error('id_ulp') aria-invalid="true" @enderror
+                >
+                    <option value="">Pilih ULP tujuan</option>
 
-                    <option value="">-- Pilih ULP --</option>
-
-                    @foreach($ulps as $ulp)
-
+                    @foreach ($ulps as $ulp)
                         <option
                             value="{{ $ulp->id_ulp }}"
-                            {{ old('id_ulp') == $ulp->id_ulp ? 'selected' : '' }}
+                            @selected(
+                                (string) old('id_ulp', request()->query('id_ulp'))
+                                === (string) $ulp->id_ulp
+                            )
                         >
                             {{ $ulp->nama_ulp }}
                         </option>
-
                     @endforeach
-
                 </select>
+
+                <small>
+                    Data target akan disimpan untuk ULP yang dipilih.
+                </small>
             </div>
 
-            <div class="form-group">
-
-                <label for="tahun">Tahun</label>
+            <div class="target-import-field">
+                <label for="target-import-year">Tahun Target</label>
 
                 <input
-                    type="number"
+                    id="target-import-year"
                     name="tahun"
-                    id="tahun"
-                    value="{{ old('tahun', 2026) }}"
+                    type="number"
                     min="2000"
                     max="2100"
+                    step="1"
+                    value="{{ old('tahun', request()->query('tahun', 2026)) }}"
                     required
+                    aria-describedby="target-import-year-help"
+                    @error('tahun') aria-invalid="true" @enderror
                 >
 
+                <small id="target-import-year-help">
+                    Tahun harus sesuai dengan judul kolom pada file.
+                    Contoh: TARGET 2026 menggunakan tahun 2026.
+                </small>
             </div>
 
-            <div class="form-group">
-
-                <label for="file">File Excel Target KPI</label>
+            <div class="target-import-field">
+                <label for="target-import-file">File Target KPI</label>
 
                 <input
-                    type="file"
+                    id="target-import-file"
                     name="file"
-                    id="file"
+                    type="file"
                     accept=".xlsx,.xls,.csv"
                     required
+                    aria-describedby="target-import-file-help"
+                    @error('file') aria-invalid="true" @enderror
                 >
 
+                <small id="target-import-file-help">
+                    Format: .xlsx, .xls, atau .csv. Maksimal 10 MB.
+                    Jika impor gagal, pilih kembali file sebelum mengirim.
+                </small>
             </div>
 
-            <button type="submit">
-                Upload & Import
-            </button>
+            <div class="target-import-note">
+                <strong>Perhatikan sebelum mengimpor</strong>
+                <p>
+                    Untuk ULP, KPI, dan tahun yang sama, impor akan memperbarui
+                    target tahunan serta target bulanan yang diproses dari file.
+                    Nilai bulanan kosong akan menghapus target pada bulan tersebut.
+                    Bulan yang tidak diproses oleh importer tetap dipertahankan.
+                    Target dan hasil perhitungan realisasi terkait juga diperbarui
+                    menggunakan rumus sistem.
+            </p>
+            </div>
 
+            <div class="target-import-actions">
+                <a
+                    href="{{ route('target.kpi') }}"
+                    class="target-import-cancel"
+                >
+                    Kembali
+                </a>
+
+                <button
+                    type="submit"
+                    class="target-import-submit"
+                    @disabled($ulps->isEmpty())
+                >
+                    Impor dan Simpan
+                </button>
+            </div>
         </form>
-
-    </div>
-
-</div>
-
-</body>
-</html>
+    </section>
+@endsection

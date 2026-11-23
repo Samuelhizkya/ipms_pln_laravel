@@ -3,50 +3,78 @@
 namespace App\Http\Controllers;
 
 use App\Imports\RealisasiKpiImport;
-use App\Models\Ulp;
 use App\Models\PeriodeKinerja;
 use App\Models\RealisasiKpi;
+use App\Models\TargetKpi;
+use App\Models\Ulp;
 use App\Services\KpiCalculationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
+use RuntimeException;
+use Throwable;
 
 class RealisasiKpiController extends Controller
 {
     /**
-     * Menampilkan halaman import Realisasi KPI.
+     * Ambil ULP yang sudah diperiksa oleh middleware.
      */
-    public function create()
+    private function accountUnit(Request $request): Ulp
     {
-        $ulps = Ulp::where('status', 'aktif')
-            ->orderBy('nama_ulp')
-            ->get();
+        abort_unless(
+            $request->session()->get('user.role') === 'ulp',
+            403,
+            'Impor realisasi hanya tersedia untuk akun ULP.'
+        );
 
-        $periodes = PeriodeKinerja::where('tahun', 2026)
+        $unit = $request->attributes->get('account_ulp');
+
+        abort_unless(
+            $unit instanceof Ulp
+                && (int) $unit->id_ulp ===
+                    (int) $request->session()->get('user.id_ulp'),
+            403,
+            'Identitas ULP tidak tersedia. Silakan login kembali.'
+        );
+
+        return $unit;
+    }
+
+    /**
+     * Menampilkan form impor realisasi.
+     */
+    public function create(Request $request)
+    {
+        $this->accountUnit($request);
+
+        // Hanya mengambil periode yang sudah ada di database.
+        $periodes = PeriodeKinerja::query()
+            ->whereBetween('bulan', [1, 12])
+            ->orderByDesc('tahun')
             ->orderBy('bulan')
             ->get();
 
         return view(
             'realisasi-kpi.import',
-            compact('ulps', 'periodes')
+            compact('periodes')
         );
     }
 
     /**
-     * Mengimpor data Realisasi KPI dari Excel.
+     * Membaca Excel, menyimpan realisasi, dan menghitung KPI.
      */
     public function import(
         Request $request,
         KpiCalculationService $kalkulasi
     ) {
-        // 1. Validasi input.
-        $request->validate([
-            'id_ulp' => [
-                'required',
-                'integer',
-                'exists:ulp,id_ulp',
-            ],
+        $accountUnit = $this->accountUnit($request);
+
+        // ULP berasal dari akun, bukan dari pilihan pengguna.
+        $unitId = (int) $accountUnit->id_ulp;
+
+        $validated = $request->validate([
             'id_periode' => [
                 'required',
                 'integer',
@@ -58,34 +86,32 @@ class RealisasiKpiController extends Controller
                 'mimes:xlsx,xls',
                 'max:10240',
             ],
+        ], [
+            'id_periode.required' =>
+                'Pilih periode realisasi terlebih dahulu.',
+            'id_periode.integer' =>
+                'Pilihan periode realisasi tidak valid.',
+            'id_periode.exists' =>
+                'Periode realisasi tidak tersedia.',
+            'file.required' =>
+                'Pilih file Excel realisasi terlebih dahulu.',
+            'file.mimes' =>
+                'Gunakan file Excel berformat .xlsx atau .xls.',
+            'file.max' =>
+                'Ukuran file maksimal 10 MB.',
         ]);
 
-        // 2. Cegah impor ulang untuk ULP dan periode yang sama.
-        $jumlahDataLama = RealisasiKpi::where(
-            'id_ulp',
-            $request->id_ulp
-        )
-            ->where('id_periode', $request->id_periode)
-            ->count();
+        $periodeId = (int) $validated['id_periode'];
 
-        if ($jumlahDataLama > 0) {
-            return back()
-                ->withInput()
-                ->with(
-                    'error',
-                    'Impor dibatalkan. ULP dan periode ini sudah memiliki '
-                    . $jumlahDataLama
-                    . ' data realisasi KPI. Periksa data yang ada '
-                    . 'sebelum melakukan impor ulang.'
-                );
-        }
+        $oldInput = [
+            'id_periode' => $periodeId,
+        ];
 
-        // 3. Ambil informasi periode.
-        $periode = PeriodeKinerja::findOrFail(
-            $request->id_periode
-        );
+        app(\App\Services\KpiImportFileValidator::class)->validate(
+    $request->file('file'),
+    'realisasi'
+);
 
-        // 4. Baca dan validasi isi Excel.
         $import = new RealisasiKpiImport();
 
         try {
@@ -93,13 +119,15 @@ class RealisasiKpiController extends Controller
                 $import,
                 $request->file('file')
             );
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             Log::error('Pembacaan Excel Realisasi KPI gagal.', [
-                'pesan' => $e->getMessage(),
+                'id_ulp' => $unitId,
+                'id_periode' => $periodeId,
+                'exception' => $e,
             ]);
 
             return back()
-                ->withInput()
+                ->withInput($oldInput)
                 ->with(
                     'error',
                     'File Excel gagal dibaca. Periksa format dan isi file.'
@@ -109,77 +137,130 @@ class RealisasiKpiController extends Controller
         $errors = $import->getErrors();
         $validRows = $import->getValidRows();
 
-        // 5. Hentikan proses jika ditemukan kesalahan data.
         if (count($errors) > 0) {
             return back()
-                ->withInput()
-                ->with('errors_import', $errors)
-                ->with('valid_rows', $validRows);
+                ->withInput($oldInput)
+                ->with('errors_import', $errors);
         }
 
         if (count($validRows) === 0) {
             return back()
-                ->withInput()
+                ->withInput($oldInput)
                 ->with(
                     'error',
-                    'Tidak ada data Realisasi KPI yang dapat disimpan.'
+                    'Tidak ada data realisasi KPI yang dapat disimpan.'
                 );
         }
 
-        // 6. Simpan realisasi dan hitung nilai KPI.
         try {
-            $jumlahDisimpan = DB::transaction(
+            $result = DB::transaction(
                 function () use (
                     $validRows,
-                    $request,
-                    $periode,
+                    $unitId,
+                    $periodeId,
                     $kalkulasi
                 ) {
+                    /*
+                     * Kunci ULP terlebih dahulu.
+                     *
+                     * Controller impor target pada tahap sebelumnya
+                     * menggunakan penguncian ULP yang sama.
+                     */
+                    $unit = Ulp::query()
+                        ->where('id_ulp', $unitId)
+                        ->where('status', 'aktif')
+                        ->lockForUpdate()
+                        ->first();
+
+                    if (!$unit) {
+                        throw ValidationException::withMessages([
+                            'id_ulp' =>
+                                'ULP akun tidak tersedia atau tidak aktif.',
+                        ]);
+                    }
+
+                    $periode = PeriodeKinerja::query()
+                        ->where('id_periode', $periodeId)
+                        ->sharedLock()
+                        ->first();
+
+                    if (
+                        !$periode ||
+                        (int) $periode->bulan < 1 ||
+                        (int) $periode->bulan > 12
+                    ) {
+                        throw ValidationException::withMessages([
+                            'id_periode' =>
+                                'Periode realisasi tidak tersedia atau tidak valid.',
+                        ]);
+                    }
+
+                    /*
+                     * Pemeriksaan dilakukan setelah ULP terkunci.
+                     *
+                     * Pengiriman kedua melalui alur ini menunggu
+                     * transaksi pertama selesai sebelum memeriksa.
+                     */
+                    $existing = RealisasiKpi::query()
+                        ->where('id_ulp', $unitId)
+                        ->where('id_periode', $periodeId)
+                        ->lockForUpdate()
+                        ->first(['id_realisasi']);
+
+                    if ($existing) {
+                        throw ValidationException::withMessages([
+                            'id_periode' =>
+                                'Impor dibatalkan. ULP dan periode ini '
+                                . 'sudah memiliki data realisasi. '
+                                . 'Periksa data pada tabel terlebih dahulu.',
+                        ]);
+                    }
+
                     $jumlah = 0;
 
                     foreach ($validRows as $row) {
-                        // Cari target tahunan berdasarkan ULP,
-                        // KPI, dan tahun.
-                        $target = DB::table('target_kpi')
-                            ->where(
-                                'id_ulp',
-                                $request->id_ulp
-                            )
-                            ->where(
-                                'id_kpi',
-                                $row['id_kpi']
-                            )
-                            ->where(
-                                'tahun',
-                                $periode->tahun
-                            )
-                            ->first();
+                        $targets = TargetKpi::query()
+                            ->where('id_ulp', $unitId)
+                            ->where('id_kpi', $row['id_kpi'])
+                            ->where('tahun', $periode->tahun)
+                            ->lockForUpdate()
+                            ->get();
+
+                        if ($targets->count() > 1) {
+                            throw new RuntimeException(
+                                'Ditemukan target ganda untuk ULP, KPI, '
+                                . 'dan tahun yang sama.'
+                            );
+                        }
+
+                        $target = $targets->first();
 
                         $targetTahunan = $target
                             ? $target->target_tahunan
                             : null;
 
-                        // Cari target bulanan sesuai periode.
                         $targetPeriode = null;
 
                         if ($target) {
-                            $targetPeriode = DB::table(
-                                'target_kpi_bulanan'
-                            )
-                                ->where(
-                                    'id_target',
-                                    $target->id_target
-                                )
+                            $bulanan = $target->targetBulanan()
                                 ->where(
                                     'bulan',
-                                    $periode->bulan
+                                    (int) $periode->bulan
                                 )
-                                ->value('nilai_target');
+                                ->get();
+
+                            if ($bulanan->count() > 1) {
+                                throw new RuntimeException(
+                                    'Ditemukan target bulanan ganda.'
+                                );
+                            }
+
+                            $targetPeriode = $bulanan->first()
+                                ?->nilai_target;
                         }
 
-                        // Susun data yang akan disimpan.
-                        $data = [
-                            'id_ulp' => $request->id_ulp,
+                        $realisasi = new RealisasiKpi([
+                            'id_ulp' => $unitId,
                             'id_kpi' => $row['id_kpi'],
                             'id_pendukung' =>
                                 $row['id_pendukung'] ?? null,
@@ -187,7 +268,7 @@ class RealisasiKpiController extends Controller
                                 $row['nama_pendukung'] ?? null,
                             'satuan_pendukung' =>
                                 $row['satuan_pendukung'] ?? null,
-                            'id_periode' => $request->id_periode,
+                            'id_periode' => $periodeId,
                             'target_tahunan' => $targetTahunan,
                             'target_periode' => $targetPeriode,
                             'realisasi' => $row['realisasi'],
@@ -195,54 +276,70 @@ class RealisasiKpiController extends Controller
                             'nilai_kpi' => null,
                             'sumber_data' => 'Excel',
                             'status_data' => 'valid',
-                        ];
+                        ]);
 
-                        // Hitung pencapaian dan nilai KPI.
-                        $realisasiKpi = new RealisasiKpi($data);
+                        $hasil = $kalkulasi->hitung($realisasi);
 
-                        $hasil = $kalkulasi->hitung(
-                            $realisasiKpi
-                        );
+                        $realisasi->pencapaian =
+                            $hasil['pencapaian'] ?? null;
 
-                        if ($hasil !== null) {
-                            $data['pencapaian'] =
-                                $hasil['pencapaian'];
+                        $realisasi->nilai_kpi =
+                            $hasil['nilai_kpi'] ?? null;
 
-                            $data['nilai_kpi'] =
-                                $hasil['nilai_kpi'];
-                        }
-
-                        // Simpan ke database.
-                        RealisasiKpi::create($data);
+                        $realisasi->save();
 
                         $jumlah++;
                     }
 
-                    return $jumlah;
-                }
+                    return [
+                        'jumlah' => $jumlah,
+                        'tahun' => (int) $periode->tahun,
+                        'bulan' => (int) $periode->bulan,
+                    ];
+                },
+                3
             );
-        } catch (\Throwable $e) {
-            Log::error('Import Realisasi KPI gagal.', [
-                'pesan' => $e->getMessage(),
-                'ulp' => $request->id_ulp,
-                'periode' => $request->id_periode,
+        } catch (ValidationException $e) {
+            return back()
+                ->withInput($oldInput)
+                ->withErrors($e->errors());
+        } catch (Throwable $e) {
+            Log::error('Penyimpanan Realisasi KPI gagal.', [
+                'id_ulp' => $unitId,
+                'id_periode' => $periodeId,
+                'exception' => $e,
             ]);
 
             return back()
-                ->withInput()
+                ->withInput($oldInput)
                 ->with(
                     'error',
-                    'Data gagal disimpan. Periksa log Laravel '
-                    . 'untuk mengetahui detail kesalahan.'
+                    'Impor realisasi dibatalkan. Tidak ada perubahan '
+                    . 'dari impor ini yang disimpan. Periksa log '
+                    . 'Laravel untuk mengetahui penyebabnya.'
                 );
         }
+    $warnings = $import->getWarnings();
 
-        // 7. Tampilkan pesan berhasil.
-        return back()->with(
-            'success',
-            'Data Realisasi KPI berhasil disimpan. '
-            . $jumlahDisimpan
-            . ' baris diproses.'
-        );
+    if ($warnings !== []) {
+    $request->session()->flash(
+        'warning',
+        "Sebagian indikator tidak diimpor:\n"
+        . implode("\n", $warnings)
+    );
+}
+        return redirect()
+            ->route('realisasi.kpi', [
+                'id_ulp' => $unitId,
+                'id_periode' => $periodeId,
+                'tahun' => $result['tahun'],
+                'bulan' => $result['bulan'],
+            ])
+            ->with(
+                'success',
+                'Data realisasi KPI berhasil disimpan. '
+                . $result['jumlah']
+                . ' baris diproses.'
+            );
     }
 }

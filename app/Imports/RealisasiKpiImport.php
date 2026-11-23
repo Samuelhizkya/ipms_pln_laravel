@@ -12,7 +12,7 @@ class RealisasiKpiImport implements ToCollection, WithHeadingRow
     protected array $errors = [];
 
     protected array $validRows = [];
-
+    protected array $warnings = [];
     /**
      * Header Excel berada pada baris ke-3.
      */
@@ -22,8 +22,44 @@ class RealisasiKpiImport implements ToCollection, WithHeadingRow
     }
 
     public function collection(Collection $rows)
-    {
-        $masterKpis = MasterKpi::where('status', 'aktif')->get();
+{
+    if ($rows->isEmpty()) {
+        $this->errors[] =
+            'File tidak memiliki baris realisasi yang dapat dibaca.';
+
+        return;
+    }
+
+    $firstRow = $rows->first();
+
+    $headers = $firstRow instanceof Collection
+        ? $firstRow->keys()->all()
+        : array_keys((array) $firstRow);
+
+    $missing = array_values(array_diff(
+        ['indikator', 'pendukung', 'realisasi'],
+        $headers
+    ));
+
+    $hasSupportingUnit =
+        in_array('satuan_pendukung', $headers, true)
+        || in_array('atuan_pendukung', $headers, true);
+
+    if (!$hasSupportingUnit) {
+        $missing[] = 'satuan_pendukung';
+    }
+
+    if ($missing !== []) {
+        $this->errors[] =
+            'Header pada baris 3 tidak sesuai template. '
+            . 'Kolom yang belum terbaca: '
+            . implode(', ', $missing)
+            . '.';
+
+        return;
+    }
+
+    $masterKpis = MasterKpi::where('status', 'aktif')->get();
 
         /*
         |--------------------------------------------------------------------------
@@ -43,10 +79,10 @@ class RealisasiKpiImport implements ToCollection, WithHeadingRow
         */
 
         $supportMapping = [
-            '-penambahan jtm'   => 8,
-            '-penambahan jtr'   => 8,
-            '-penambahan trafo' => 8,
-        ];
+    '-penambahan jtm' => 'KPI017',
+    '-penambahan jtr' => 'KPI017',
+    '-penambahan trafo' => 'KPI017',
+];
 
         /*
         |--------------------------------------------------------------------------
@@ -59,11 +95,9 @@ class RealisasiKpiImport implements ToCollection, WithHeadingRow
         */
 
         $directMapping = [
-            /*
-             * KPI035
-             */
-            'b. kerusakan peralatan distribusi (sesuai kewenangan)' => 26,
-        ];
+    'b. kerusakan peralatan distribusi (sesuai kewenangan)'
+        => 'KPI035',
+];
 
         /*
         |--------------------------------------------------------------------------
@@ -121,7 +155,16 @@ class RealisasiKpiImport implements ToCollection, WithHeadingRow
                 $kpi->nama_kpi
             );
 
-            $kpiMap[$nama] = $kpi;
+            if ($nama === '' || isset($kpiMap[$nama])) {
+    $this->errors[] =
+        'Nama Master KPI aktif kosong atau tidak unik: '
+        . $kpi->nama_kpi
+        . '. Periksa master sebelum mengimpor.';
+
+    continue;
+}
+
+$kpiMap[$nama] = $kpi;
         }
 
         /*
@@ -199,14 +242,22 @@ class RealisasiKpiImport implements ToCollection, WithHeadingRow
             */
 
             if (in_array($indikator, $ignoredIndicators, true)) {
-                continue;
-            }
+    $this->warnings[] =
+        "Baris {$barisExcel}: \"{$indikatorAsli}\" tidak disimpan "
+        . 'karena termasuk indikator yang dikecualikan '
+        . 'oleh aturan importer saat ini.';
+
+    continue;
+}
 
             /*
              * Realisasi harus berupa angka.
              */
 
-            if (!is_numeric($realisasi)) {
+            if (
+    !is_numeric($realisasi)
+    || !is_finite((float) $realisasi)
+) {
 
                 $this->errors[] =
                     "Baris {$barisExcel}: REALISASI untuk "
@@ -257,7 +308,7 @@ class RealisasiKpiImport implements ToCollection, WithHeadingRow
                 $idKpi = $supportMapping[$indikator];
 
                 $kpi = $masterKpis->firstWhere(
-                    'id_kpi',
+                    'kode_kpi',
                     $idKpi
                 );
 
@@ -324,7 +375,7 @@ class RealisasiKpiImport implements ToCollection, WithHeadingRow
                 $idKpi = $directMapping[$indikator];
 
                 $kpi = $masterKpis->firstWhere(
-                    'id_kpi',
+                    'kode_kpi',
                     $idKpi
                 );
             }
@@ -433,15 +484,40 @@ class RealisasiKpiImport implements ToCollection, WithHeadingRow
      * Ambil daftar error.
      */
     public function getErrors(): array
-    {
-        return $this->errors;
+{
+    $errors = $this->errors;
+    $seen = [];
+
+    foreach ($this->validRows as $row) {
+        $key = json_encode([
+            (int) $row['id_kpi'],
+            $this->normalize(
+                $row['nama_pendukung'] ?? ''
+            ),
+        ], JSON_THROW_ON_ERROR);
+
+        if (isset($seen[$key])) {
+            $errors[] =
+                'Realisasi ganda untuk '
+                . $row['indikator']
+                . ' / '
+                . ($row['nama_pendukung'] ?? 'indikator utama')
+                . '. Sisakan satu nilai final sebelum mengimpor.';
+        }
+
+        $seen[$key] = true;
     }
 
-    /**
-     * Ambil data yang berhasil divalidasi.
-     */
-    public function getValidRows(): array
-    {
-        return $this->validRows;
-    }
+    return array_values(array_unique($errors));
+}
+
+public function getValidRows(): array
+{
+    return $this->validRows;
+}
+
+public function getWarnings(): array
+{
+    return array_values(array_unique($this->warnings));
+}
 }

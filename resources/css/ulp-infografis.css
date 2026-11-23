@@ -1,0 +1,259 @@
+.ui-page {
+    color: #125d72;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+.ui-page * {
+    box-sizing: border-box;
+}
+
+.ui-panel {
+    padding: 24px;
+    margin-bottom: 22px;
+    border: 1px solid #dfeaf0;
+    border-radius: 18px;
+    background: #fff;
+    min-width: 0;
+}
+
+.ui-page h2 {
+    margin: 0 0 14px;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.ui-note {
+    color: #71869a;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.ui-filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    align-items: end;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.ui-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.ui-field select,
+.ui-unit {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid #d4e4ec;
+    border-radius: 10px;
+    color: #125d72;
+    background: #fff;
+    font: inherit;
+    font-size: 13px;
+}
+
+.ui-unit {
+    background: #f4fafc;
+}
+
+/* Tombol mengikuti Impor Excel pada Realisasi KPI. */
+.ui-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 40px;
+    padding: 10px 16px;
+
+    border: 1px solid #125d72;
+    border-radius: 8px;
+
+    background: #125d72;
+    color: #fff;
+
+    font-family: var(--font-utama, 'Poppins', sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
+}
+
+.ui-button:hover:not(:disabled) {
+    background: #14a2ba;
+    border-color: #14a2ba;
+    color: #fff;
+}
+
+.ui-button:active:not(:disabled) {
+    background: #125d72;
+    border-color: #125d72;
+}
+
+.ui-button:focus-visible {
+    outline: 2px solid #14a2ba;
+    outline-offset: 2px;
+}
+
+.ui-button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.ui-indicator {
+    margin-top: 20px;
+}
+
+.ui-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 22px;
+    align-items: stretch;
+}
+
+.ui-map {
+    width: 100%;
+    height: 440px;
+    border: 1px solid #d4e4ec;
+    border-radius: 12px;
+    background: #edf7fa;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.ui-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 16px;
+    color: #71869a;
+    font-size: 11px;
+}
+
+.ui-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ui-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.ui-detail-name {
+    margin: 0 0 12px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.8;
+}
+
+.ui-metric {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 17px 0;
+    border-bottom: 1px solid #e4edf2;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.ui-metric strong {
+    text-align: right;
+}
+
+.ui-status {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: #eef4f6;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ui-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.ui-card {
+    padding: 22px;
+    border-radius: 16px;
+    color: #fff;
+    background: linear-gradient(120deg, #156278, #14a2ba);
+}
+
+.ui-card span {
+    font-size: 12px;
+}
+
+.ui-card strong {
+    display: block;
+    margin-top: 12px;
+    font-size: 30px;
+}
+
+.ui-empty {
+    padding: 24px;
+    color: #71869a;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+@media (max-width: 1100px) {
+    .ui-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .ui-cards,
+    .ui-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .ui-cards,
+    .ui-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .ui-panel {
+        padding: 18px;
+    }
+
+    .ui-map {
+        height: 350px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ui-button {
+        transition: none;
+    }
+}
+/* Penanda kantor sesuai aplikasi Flutter. */
+.ui-page .ui-office-marker { border: 0; background: none; cursor: pointer; }
+.ui-page .ui-office-marker span { display: grid; place-items: center; width: 34px; height: 34px; border: 2px solid white; border-radius: 50%; color: white; font-size: 22px; box-shadow: 0 2px 8px #163b4960; }
+.ui-page .ui-office-popup { font: 12px/1.7 Inter, sans-serif; }
+.ui-page .ui-office-popup > strong { display: block; font-size: 15px; color: #125d72; }
+.ui-page .ui-office-popup small { color: #71869a; }
+.ui-page .ui-office-popup h4 { font-size: 12px; margin: 10px 0 3px; }
+.ui-page .ui-office-popup p { margin: 3px 0 8px; }
+.ui-page .ui-office-popup a, .ui-page .ui-office-popup button { display: block; width: 100%; border-radius: 8px; padding: 9px; margin-top: 8px; text-align: center; font: inherit; box-sizing: border-box; }
+.ui-page .ui-office-popup a { background: #125d72; color: white; text-decoration: none; }
+.ui-page .ui-office-popup button { background: #e7f6f9; border: 1px solid #b8dde5; color: #125d72; cursor: pointer; }
+.ui-page .ui-office-popup input { width: 100%; }

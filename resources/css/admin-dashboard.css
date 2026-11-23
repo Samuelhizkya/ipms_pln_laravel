@@ -1,0 +1,1643 @@
+.dashboard-page {
+
+    --deep-teal: #125D72;
+
+    --cyan: #14A2BA;
+
+    --ice-blue: #E7F6F9;
+
+    --pln-yellow: #EFE62F;
+
+    --green: #237A34;
+
+    --yellow: #F39C12;
+
+    --red: #E03E3E;
+
+    --text: #193747;
+
+    --muted: #718096;
+
+    --border: #E5EDF1;
+
+}
+
+.dashboard-page {
+
+    font-family: 'Inter', sans-serif;
+
+    color: var(--text);
+
+    max-width: 1600px;
+
+    margin: 0 auto;
+
+}
+
+.dashboard-page *,
+
+.dashboard-page *::before,
+
+.dashboard-page *::after {
+
+    box-sizing: border-box;
+
+}
+
+.dashboard-page h1,
+
+.dashboard-page h2,
+
+.dashboard-page h3,
+
+.dashboard-page button {
+
+    font-family: 'Poppins', sans-serif;
+
+}
+
+:where(.dashboard-page) .dashboard-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-bottom: 24px;
+
+}
+
+:where(.dashboard-page) .dashboard-heading h1 {
+
+    font-size: 27px;
+
+    color: var(--deep-teal);
+
+    font-weight: 700;
+
+}
+
+:where(.dashboard-page) .dashboard-heading p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-top: 5px;
+
+}
+
+:where(.dashboard-page) .period-label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: #FFFFFF;
+
+    border: 1px solid var(--border);
+
+    padding: 13px 17px;
+
+    border-radius: 12px;
+
+    color: var(--deep-teal);
+
+}
+
+:where(.dashboard-page) .period-label svg {
+
+    width: 22px;
+
+    height: 22px;
+
+    color: var(--cyan);
+
+}
+
+:where(.dashboard-page) .period-label small {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+:where(.dashboard-page) .period-label strong {
+
+    font-size: 13px;
+
+}
+
+:where(.dashboard-page) .dash-panel {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    padding: 21px;
+
+    box-shadow: 0 3px 16px rgba(18,93,114,0.035);
+
+    min-width: 0;
+
+}
+
+:where(.dashboard-page) .panel-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 19px;
+
+}
+
+:where(.dashboard-page) .panel-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: var(--deep-teal);
+
+}
+
+:where(.dashboard-page) .panel-title svg {
+
+    width: 19px;
+
+    height: 19px;
+
+    color: var(--cyan);
+
+}
+
+:where(.dashboard-page) .detail-link {
+
+    color: var(--cyan);
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+
+:where(.dashboard-page) .detail-link:hover {
+
+    text-decoration: underline;
+
+}
+
+/* FILTER DASHBOARD */
+
+:where(.dashboard-page) .filter-panel {
+
+    margin-bottom: 20px;
+
+}
+
+:where(.dashboard-page) .filter-layout {
+
+    display: grid;
+
+    grid-template-columns: 1.8fr 1fr 1fr auto;
+
+    gap: 15px;
+
+    align-items: end;
+
+}
+
+:where(.dashboard-page) .filter-group label {
+
+    display: block;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: var(--deep-teal);
+
+    margin-bottom: 8px;
+
+}
+
+:where(.dashboard-page) .filter-group select {
+
+    width: 100%;
+
+    height: 43px;
+
+    border: 1px solid #DCE7ED;
+
+    background: white;
+
+    border-radius: 8px;
+
+    padding: 0 12px;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 12px;
+
+    color: #334155;
+
+    outline: none;
+
+}
+
+:where(.dashboard-page) .filter-group select:focus,
+
+:where(.dashboard-page) .table-search:focus {
+
+    border-color: var(--cyan);
+
+}
+
+:where(.dashboard-page) .filter-button {
+
+    height: 43px;
+
+    padding: 0 22px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: var(--cyan);
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+:where(.dashboard-page) .filter-button:hover {
+
+    background: var(--deep-teal);
+
+}
+
+/* EMPAT KARTU GRADASI */
+
+:where(.dashboard-page) .summary-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0,1fr));
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+
+}
+
+:where(.dashboard-page) .summary-card {
+
+    position: relative;
+
+    isolation: isolate;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    min-height: 185px;
+
+    padding: 22px;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    color: white;
+
+    background: linear-gradient(
+
+        120deg,
+
+        #125D72 0%,
+
+        #148BA1 42%,
+
+        #14A2BA 100%
+
+    );
+
+    box-shadow: 0 6px 19px rgba(18,93,114,0.12);
+
+    transition: transform 0.2s, box-shadow 0.2s;
+
+}
+
+:where(.dashboard-page) .summary-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 24px rgba(18,93,114,0.19);
+
+}
+
+/* FOTO SEBAGAI LATAR SAMAR */
+
+:where(.dashboard-page) .summary-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -2;
+
+    background-image: var(--card-image);
+
+    background-position: center right;
+
+    background-size: cover;
+
+    background-repeat: no-repeat;
+
+    opacity: 0.15;
+
+    pointer-events: none;
+
+}
+
+/* OVERLAY AGAR TULISAN TETAP JELAS */
+
+:where(.dashboard-page) .summary-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -1;
+
+    background: linear-gradient(
+
+        90deg,
+
+        rgba(18,93,114,0.45) 0%,
+
+        rgba(20,162,186,0.10) 65%,
+
+        rgba(20,162,186,0.04) 100%
+
+    );
+
+    pointer-events: none;
+
+}
+
+:where(.dashboard-page) .summary-ulp {
+
+--card-image: var(--dashboard-image-ulp);
+
+}
+
+:where(.dashboard-page) .summary-kpi {
+
+--card-image: var(--dashboard-image-kpi);
+
+}
+
+:where(.dashboard-page) .summary-nko {
+
+--card-image: var(--dashboard-image-nko);
+
+}
+
+:where(.dashboard-page) .summary-problem {
+
+--card-image: var(--dashboard-image-problem);
+
+}
+
+:where(.dashboard-page) .summary-info {
+
+    position: relative;
+
+    z-index: 1;
+
+    min-width: 0;
+
+}
+
+:where(.dashboard-page) .summary-info p {
+
+    font-size: 12px;
+
+    color: #E7F6F9;
+
+    margin-bottom: 13px;
+
+    font-weight: 500;
+
+}
+
+:where(.dashboard-page) .summary-info h2 {
+    font-family: 'Inter', sans-serif;
+
+    font-size: 35px;
+
+    line-height: 1.2;
+
+    color: white;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+}
+
+:where(.dashboard-page) .summary-info small {
+
+    display: block;
+
+    font-size: 10px;
+
+    color: #E7F6F9;
+
+    margin-top: 13px;
+
+    line-height: 1.6;
+
+}
+
+:where(.dashboard-page) .summary-icon {
+
+    position: relative;
+
+    z-index: 1;
+
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: rgba(255,255,255,0.17);
+
+}
+
+:where(.dashboard-page) .summary-icon svg {
+
+    width: 22px;
+
+    height: 22px;
+
+}
+
+:where(.dashboard-page) .summary-ulp .summary-icon {
+
+    color: #DDF8FF;
+
+}
+
+:where(.dashboard-page) .summary-kpi .summary-icon {
+
+    color: #C2FFD2;
+
+}
+
+:where(.dashboard-page) .summary-nko .summary-icon {
+
+    color: #FFF3A0;
+
+}
+
+:where(.dashboard-page) .summary-problem .summary-icon {
+
+    background: rgba(224,62,62,0.85);
+
+    color: white;
+
+}
+
+/* GRAFIK */
+
+:where(.dashboard-page) .performance-grid {
+
+    display: grid;
+
+    grid-template-columns: 1.45fr 1fr;
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+
+}
+
+:where(.dashboard-page) .chart-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 280px;
+
+}
+
+:where(.dashboard-page) .chart-note {
+
+    text-align: center;
+
+    font-size: 11px;
+
+    color: var(--muted);
+
+    margin-top: 12px;
+
+    line-height: 1.6;
+
+}
+
+:where(.dashboard-page) .chart-legend {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    margin-top: 14px;
+
+    font-size: 11px;
+
+    color: #64748B;
+
+}
+
+:where(.dashboard-page) .legend-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+}
+
+:where(.dashboard-page) .legend-dot {
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+    display: inline-block;
+
+}
+
+/* STATISTIK KPI */
+
+:where(.dashboard-page) .statistics-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 18px;
+
+}
+
+:where(.dashboard-page) .donut-wrapper {
+
+    position: relative;
+
+    width: 205px;
+
+    height: 205px;
+
+}
+
+:where(.dashboard-page) .donut-center {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%,-50%);
+
+    text-align: center;
+
+    pointer-events: none;
+
+}
+
+:where(.dashboard-page) .donut-center strong {
+
+    display: block;
+
+    font-size: 32px;
+
+    color: #FFFFFF;
+
+    text-shadow: 0 2px 6px rgba(0,0,0,0.55);
+
+}
+
+:where(.dashboard-page) .donut-center small {
+
+    display: block;
+
+    color: #FFFFFF;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    margin-top: 5px;
+
+    text-shadow: 0 2px 6px rgba(0,0,0,0.55);
+
+}
+
+:where(.dashboard-page) .status-cards {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,minmax(0,1fr));
+
+    gap: 9px;
+
+    width: 100%;
+
+}
+
+:where(.dashboard-page) .status-card {
+
+    padding: 12px 6px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+}
+
+:where(.dashboard-page) .status-card strong {
+
+    display: block;
+
+    font-size: 21px;
+
+}
+
+:where(.dashboard-page) .status-card p {
+
+    font-size: 10px;
+
+    margin-top: 5px;
+
+    line-height: 1.5;
+
+}
+
+:where(.dashboard-page) .status-achieved {
+
+    background: #E5F6EA;
+
+    color: var(--green);
+
+}
+
+:where(.dashboard-page) .status-warning {
+
+    background: #FFF5D9;
+
+    color: #B77900;
+
+}
+
+:where(.dashboard-page) .status-danger {
+
+    background: #FDEAEA;
+
+    color: var(--red);
+
+}
+
+/* RANKING DAN WARNING */
+
+:where(.dashboard-page) .insight-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+
+}
+
+:where(.dashboard-page) .ranking-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+}
+
+:where(.dashboard-page) .ranking-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border: 1px solid #EAF0F3;
+
+    padding: 11px;
+
+    border-radius: 9px;
+
+}
+
+:where(.dashboard-page) .ranking-number {
+
+    height: 30px;
+
+    width: 30px;
+
+    border-radius: 8px;
+
+    background: var(--ice-blue);
+
+    color: var(--deep-teal);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+
+    font-size: 12px;
+
+    flex-shrink: 0;
+
+}
+
+:where(.dashboard-page) .ranking-name {
+
+    flex: 1;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+}
+
+:where(.dashboard-page) .ranking-score {
+
+    font-size: 12px;
+
+    color: #64748B;
+
+    font-weight: 600;
+
+}
+
+:where(.dashboard-page) .warning-empty {
+
+    min-height: 250px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    text-align: center;
+
+}
+
+:where(.dashboard-page) .warning-empty svg {
+
+    width: 40px;
+
+    height: 40px;
+
+    color: var(--yellow);
+
+}
+
+:where(.dashboard-page) .warning-empty strong {
+
+    color: var(--deep-teal);
+
+    font-size: 13px;
+
+}
+
+:where(.dashboard-page) .warning-empty p {
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+    max-width: 310px;
+
+}
+
+/* TABEL KPI */
+
+:where(.dashboard-page) .table-panel {
+
+    margin-bottom: 20px;
+
+}
+
+:where(.dashboard-page) .table-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+:where(.dashboard-page) .table-search {
+
+    border: 1px solid #DFE9ED;
+
+    border-radius: 8px;
+
+    padding: 10px 12px;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 11px;
+
+    width: 200px;
+
+    outline: none;
+
+}
+
+:where(.dashboard-page) .table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+:where(.dashboard-page) .kpi-table {
+
+    border-collapse: collapse;
+
+    width: 100%;
+
+    min-width: 720px;
+
+    text-align: left;
+
+    font-size: 12px;
+
+}
+
+:where(.dashboard-page) .kpi-table th {
+
+    background: #EFF5F7;
+
+    color: #28495B;
+
+    padding: 14px 13px;
+
+    font-weight: 600;
+
+    border-bottom: 1px solid #E2EAF0;
+
+}
+
+:where(.dashboard-page) .kpi-table td {
+
+    padding: 15px 13px;
+
+    border-bottom: 1px solid #EDF1F4;
+
+    color: #475569;
+
+}
+
+:where(.dashboard-page) .kpi-table tbody tr:hover {
+
+    background: #F0FAFC;
+
+}
+
+:where(.dashboard-page) .indicator-name {
+
+    font-weight: 500;
+
+    color: #244457 !important;
+
+}
+
+:where(.dashboard-page) .status-empty {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: #F1F5F9;
+
+    color: #64748B;
+
+    font-size: 10px;
+
+}
+
+:where(.dashboard-page) .table-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 17px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+/* INFOGRAFIS */
+
+:where(.dashboard-page) .map-panel {
+
+    margin-bottom: 20px;
+
+}
+
+:where(.dashboard-page) .map-placeholder {
+
+    min-height: 180px;
+
+    border: 1px dashed #B9D7E1;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #F3FAFC;
+
+    text-align: center;
+
+    gap: 12px;
+
+    padding: 20px;
+
+}
+
+:where(.dashboard-page) .map-placeholder svg {
+
+    width: 38px;
+
+    height: 38px;
+
+    color: var(--cyan);
+
+}
+
+:where(.dashboard-page) .map-placeholder strong {
+
+    font-size: 13px;
+
+    color: var(--deep-teal);
+
+}
+
+:where(.dashboard-page) .map-placeholder p {
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    line-height: 1.6;
+
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1200px) {
+    :where(.dashboard-page) .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 950px) {
+
+    :where(.dashboard-page) .performance-grid,
+
+    :where(.dashboard-page) .insight-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    :where(.dashboard-page) .filter-layout {
+
+        grid-template-columns: repeat(2,minmax(0,1fr));
+
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    :where(.dashboard-page) .dashboard-heading {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    :where(.dashboard-page) .dashboard-heading h1 {
+
+        font-size: 21px;
+
+    }
+
+    :where(.dashboard-page) .filter-layout, :where(.dashboard-page) .summary-grid { grid-template-columns: 1fr; }
+
+    :where(.dashboard-page) .panel-heading {
+
+        flex-wrap: wrap;
+
+    }
+
+    :where(.dashboard-page) .dash-panel {
+
+        padding: 16px;
+
+    }
+
+    :where(.dashboard-page) .table-actions {
+
+        width: 100%;
+
+        flex-wrap: wrap;
+
+    }
+
+    :where(.dashboard-page) .table-search {
+
+        width: 100%;
+
+    }
+
+}
+
+/* PENYESUAIAN DESAIN RANKING, PERINGATAN, DONAT, DAN TABEL */
+
+:where(.dashboard-page) .ranking-item { justify-content:space-between; padding:11px 12px; }
+
+:where(.dashboard-page) .ranking-left { display:flex; align-items:center; gap:10px; min-width:0; }
+
+:where(.dashboard-page) .ranking-number { width:32px; height:32px; font-size:13px; }
+
+:where(.dashboard-page) .ranking-trophy { display:flex; align-items:center; justify-content:center; width:31px; height:31px; border-radius:9px; flex-shrink:0; }
+
+:where(.dashboard-page) .ranking-trophy svg { width:18px; height:18px; }
+
+:where(.dashboard-page) .ranking-trophy.gold { color:#B58A00; background:#FFF3C9; }
+
+:where(.dashboard-page) .ranking-trophy.silver { color:#66798D; background:#EEF3F8; }
+
+:where(.dashboard-page) .ranking-trophy.bronze { color:#A66838; background:#FBEBDD; }
+
+:where(.dashboard-page) .ranking-score { white-space:nowrap; color:var(--deep-teal); }
+
+:where(.dashboard-page) .simulation-caption { color:var(--muted); font-size:10px; line-height:1.6; margin:8px 0 14px; }
+
+:where(.dashboard-page) .attention-list { display:flex; flex-direction:column; gap:10px; }
+
+:where(.dashboard-page) .attention-item { border:1px solid #F2E6E2; border-left:4px solid var(--red); border-radius:10px; background:#FFFAF9; padding:13px; }
+
+:where(.dashboard-page) .attention-item.warning { border-left-color:var(--yellow); background:#FFFCF5; border-color:#F6EBD5; }
+
+:where(.dashboard-page) .attention-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+
+:where(.dashboard-page) .attention-title { font-size:12px; font-weight:700; line-height:1.5; color:var(--deep-teal); }
+
+:where(.dashboard-page) .attention-unit { font-size:10px; color:var(--muted); margin-top:3px; }
+
+:where(.dashboard-page) .attention-badge { display:inline-block; flex-shrink:0; font-size:10px; background:#FDEAEA; color:var(--red); padding:5px 8px; border-radius:7px; font-weight:600; }
+
+:where(.dashboard-page) .attention-item.warning .attention-badge { background:#FFF1D6; color:#996700; }
+
+:where(.dashboard-page) .attention-metrics { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; margin-top:11px; }
+
+:where(.dashboard-page) .attention-metrics div { border:1px solid #F0E9E5; background:white; padding:9px 10px; border-radius:8px; }
+
+:where(.dashboard-page) .attention-metrics small { display:block; color:var(--muted); font-size:10px; margin-bottom:4px; }
+
+:where(.dashboard-page) .attention-metrics strong { color:var(--deep-teal); font-size:12px; }
+
+/* Efek kedalaman pada donat; data dan interaksi tetap memakai Chart.js */
+
+:where(.dashboard-page) .donut-wrapper { width:220px; height:225px; margin-top:8px; isolation:isolate; }
+
+:where(.dashboard-page) .donut-wrapper::before {
+    content: none;
+}
+
+:where(.dashboard-page) .donut-wrapper canvas { position:relative; z-index:1; }
+
+:where(.dashboard-page) .donut-center { top:46%; z-index:3; }
+
+:where(.dashboard-page) .kpi-table th { background:#14A2BA; color:#FFFFFF; border-bottom:1px solid #1495AD; }
+
+:where(.dashboard-page) .kpi-table th:first-child { border-top-left-radius:8px; }
+
+:where(.dashboard-page) .kpi-table th:last-child { border-top-right-radius:8px; }
+
+@media (max-width:600px) { :where(.dashboard-page) .attention-top {flex-wrap:wrap;} :where(.dashboard-page) .ranking-name {font-size:11px;} :where(.dashboard-page) .ranking-score {font-size:11px;} }
+
+/* PETA INTERAKTIF ULP */
+
+:where(.dashboard-page) .ulp-map-intro { color:var(--muted);font-size:12px;margin:-2px 0 14px;line-height:1.7; }
+
+:where(.dashboard-page) .ulp-map-toolbar { display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px; }
+
+:where(.dashboard-page) .ulp-map-legend { display:flex;align-items:center;flex-wrap:wrap;gap:15px;font-size:12px;color:#475569; }
+
+:where(.dashboard-page) .ulp-legend-dot { display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:middle;border:2px solid white;box-shadow:0 0 0 1px #ccdbe1; }
+
+:where(.dashboard-page) .ulp-legend-filter {display:inline-flex;align-items:center;gap:3px;border:1px solid transparent;border-radius:8px;padding:7px 9px;background:transparent;color:#475569;font:500 12px Inter,sans-serif;cursor:pointer;transition:background .18s,border-color .18s;}
+:where(.dashboard-page) .ulp-legend-filter:hover,:where(.dashboard-page) .ulp-legend-filter:focus-visible {background:#EAF7FA;border-color:#A9DCE6;outline:none;}
+:where(.dashboard-page) .ulp-legend-filter[aria-pressed="true"] {background:#E6F7FB;border-color:#14A2BA;color:#125D72;font-weight:700;box-shadow:0 0 0 2px rgba(20,162,186,.08);}
+:where(.dashboard-page) .ulp-legend-filter .ulp-legend-dot {margin-right:4px;}
+
+:where(.dashboard-page) .ulp-map-reset { border:1px solid #b9dbe3;background:#effaff;color:var(--deep-teal);border-radius:8px;padding:8px 13px;font:600 12px Inter,sans-serif;cursor:pointer; }
+
+:where(.dashboard-page) .ulp-map-reset:hover { background:#dff5fa; }
+
+:where(.dashboard-page) #ulpMap { width:100%;height:410px;min-height:310px;border-radius:12px;border:1px solid #c9e4eb;z-index:0;background:#e8f4f7; }
+
+:where(.dashboard-page) .ulp-map-footnote {font-size:11px;line-height:1.6;color:var(--muted);margin-top:11px;}
+
+:where(.dashboard-page) .ulp-map-popup {min-width:150px;font-family:Inter,sans-serif;line-height:1.6;}
+
+:where(.dashboard-page) .ulp-map-popup strong {color:#125D72;font-size:13px;}
+
+:where(.dashboard-page) .ulp-map-popup span {color:#64748b;font-size:11px;}
+
+@media(max-width:600px) {:where(.dashboard-page) #ulpMap {height:340px;} :where(.dashboard-page) .ulp-map-toolbar {align-items:flex-start;}}
+
+/* FALLBACK CSS LEAFLET. Membenahi peta jika stylesheet CDN tidak termuat. */
+
+:where(.dashboard-page) #ulpMap.leaflet-container {
+
+    position:relative !important;
+
+    display:block;
+
+    overflow:hidden !important;
+
+    width:100% !important;
+
+    height:410px !important;
+
+    font:12px/1.5 Inter, sans-serif;
+
+    cursor:grab;
+
+    background:#e8f4f7;
+
+    touch-action:pan-x pan-y;
+
+}
+
+:where(.dashboard-page) #ulpMap.leaflet-container:active { cursor:grabbing; }
+
+:where(.dashboard-page) #ulpMap .leaflet-pane, :where(.dashboard-page) #ulpMap .leaflet-map-pane, :where(.dashboard-page) #ulpMap .leaflet-tile-container, :where(.dashboard-page) #ulpMap .leaflet-layer, :where(.dashboard-page) #ulpMap .leaflet-control-container { position:absolute;left:0;top:0; }
+
+:where(.dashboard-page) #ulpMap .leaflet-pane { width:100%;height:100%; }
+
+:where(.dashboard-page) #ulpMap .leaflet-map-pane { z-index:400; }
+
+:where(.dashboard-page) #ulpMap .leaflet-tile-pane { z-index:200; }
+
+:where(.dashboard-page) #ulpMap .leaflet-overlay-pane { z-index:400; }
+
+:where(.dashboard-page) #ulpMap .leaflet-shadow-pane { z-index:500; }
+
+:where(.dashboard-page) #ulpMap .leaflet-marker-pane { z-index:600; }
+
+:where(.dashboard-page) #ulpMap .leaflet-tooltip-pane { z-index:650; }
+
+:where(.dashboard-page) #ulpMap .leaflet-popup-pane { z-index:700; }
+
+:where(.dashboard-page) #ulpMap .leaflet-tile-container { width:100%;height:100%;pointer-events:none; }
+
+:where(.dashboard-page) #ulpMap .leaflet-tile { position:absolute !important;left:0;top:0;width:256px;height:256px;border:0;max-width:none !important;max-height:none !important; }
+
+:where(.dashboard-page) #ulpMap .leaflet-image-layer, :where(.dashboard-page) #ulpMap .leaflet-marker-icon, :where(.dashboard-page) #ulpMap .leaflet-marker-shadow { position:absolute;left:0;top:0;max-width:none !important; }
+
+:where(.dashboard-page) #ulpMap .leaflet-zoom-animated { transform-origin:0 0; }
+
+:where(.dashboard-page) #ulpMap .leaflet-zoom-hide { visibility:hidden; }
+
+:where(.dashboard-page) #ulpMap .leaflet-interactive { cursor:pointer; }
+
+:where(.dashboard-page) #ulpMap .leaflet-overlay-pane svg { position:absolute;left:0;top:0;overflow:hidden; }
+
+:where(.dashboard-page) #ulpMap .leaflet-control { position:relative;z-index:800;pointer-events:auto;clear:both; }
+
+:where(.dashboard-page) #ulpMap .leaflet-top, :where(.dashboard-page) #ulpMap .leaflet-bottom { position:absolute;z-index:1000;pointer-events:none; }
+
+:where(.dashboard-page) #ulpMap .leaflet-top { top:0; }
+
+:where(.dashboard-page) #ulpMap .leaflet-bottom { bottom:0; }
+
+:where(.dashboard-page) #ulpMap .leaflet-left { left:0; }
+
+:where(.dashboard-page) #ulpMap .leaflet-right { right:0; }
+
+:where(.dashboard-page) #ulpMap .leaflet-left .leaflet-control { float:left;margin-left:10px; }
+
+:where(.dashboard-page) #ulpMap .leaflet-right .leaflet-control { float:right;margin-right:10px; }
+
+:where(.dashboard-page) #ulpMap .leaflet-top .leaflet-control { margin-top:10px; }
+
+:where(.dashboard-page) #ulpMap .leaflet-bottom .leaflet-control { margin-bottom:10px; }
+
+:where(.dashboard-page) #ulpMap .leaflet-control-zoom { border:2px solid rgba(0,0,0,.15);border-radius:5px;overflow:hidden;box-shadow:0 1px 5px #0003; }
+
+:where(.dashboard-page) #ulpMap .leaflet-control-zoom a { display:block;width:30px;height:30px;line-height:30px;text-align:center;background:white;color:#125D72;text-decoration:none;font:bold 20px Inter, sans-serif;border-bottom:1px solid #ddd; }
+
+:where(.dashboard-page) #ulpMap .leaflet-control-zoom a:last-child { border-bottom:0; }
+
+:where(.dashboard-page) #ulpMap .leaflet-control-attribution { background:rgba(255,255,255,.85);padding:2px 6px;font:10px Inter, sans-serif;color:#333; }
+
+:where(.dashboard-page) #ulpMap .leaflet-control-attribution a { color:#087f9a;text-decoration:none; }
+
+:where(.dashboard-page) #ulpMap .leaflet-popup { position:absolute;text-align:center;margin-bottom:20px; }
+
+:where(.dashboard-page) #ulpMap .leaflet-popup-content-wrapper { background:white;border-radius:12px;box-shadow:0 3px 14px #0003;padding:1px; }
+
+:where(.dashboard-page) #ulpMap .leaflet-popup-content { margin:12px 17px;line-height:1.5;text-align:left; }
+
+:where(.dashboard-page) #ulpMap .leaflet-popup-tip-container { position:absolute;left:50%;bottom:-18px;margin-left:-20px;width:40px;height:20px;overflow:hidden; }
+
+:where(.dashboard-page) #ulpMap .leaflet-popup-tip { width:16px;height:16px;background:white;transform:translate(12px,-8px) rotate(45deg);box-shadow:0 3px 14px #0003; }
+
+:where(.dashboard-page) #ulpMap .leaflet-popup-close-button { position:absolute;right:7px;top:5px;width:18px;height:18px;text-align:center;text-decoration:none;color:#555;font:bold 18px Inter, sans-serif;z-index:1; }
+
+:where(.dashboard-page) #ulpMap .leaflet-tooltip { position:absolute;background:white;border:1px solid #ddd;border-radius:4px;padding:5px 8px;color:#125D72;white-space:nowrap;box-shadow:0 2px 8px #0002;pointer-events:none; }
+
+@media(max-width:600px){ :where(.dashboard-page) #ulpMap.leaflet-container {height:340px !important;} }
+
+/* Titik ULP menggunakan marker HTML, bukan path SVG, supaya klik lebih stabil. */
+:where(.dashboard-page) #ulpMap .leaflet-marker-pane { pointer-events: auto !important; }
+:where(.dashboard-page) #ulpMap .leaflet-marker-icon.ulp-clickable-marker {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    background: transparent;
+    border: 0;
+}
+:where(.dashboard-page) #ulpMap .ulp-marker-dot {
+    display: block;
+    width: 21px;
+    height: 21px;
+    border: 2.5px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 6px rgba(0,0,0,.3);
+    transition: transform .16s ease;
+    pointer-events: none;
+}
+:where(.dashboard-page) #ulpMap .ulp-clickable-marker:hover .ulp-marker-dot { transform: scale(1.2); }
+:where(.dashboard-page) #ulpMap .leaflet-popup-pane, :where(.dashboard-page) #ulpMap .leaflet-control { pointer-events: auto; }
+
+/* Penanda dan popup harus berada di atas lapisan tile peta. */
+:where(.dashboard-page) #ulpMap .leaflet-marker-pane { z-index: 650 !important; }
+:where(.dashboard-page) #ulpMap .leaflet-popup-pane { z-index: 750 !important; }
+:where(.dashboard-page) #ulpMap .leaflet-marker-icon.ulp-clickable-marker { z-index: 1; }
+
+/* TAMPILAN AWAL: PETA KIRI + RANKING 10 ULP KANAN */
+
+:where(.dashboard-page) .dashboard-overview{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(320px,1fr);gap:18px;align-items:stretch;margin-bottom:22px}
+
+:where(.dashboard-page) .dashboard-overview>.dash-panel{margin-bottom:0;min-width:0}
+
+:where(.dashboard-page) .dashboard-overview .map-panel{display:flex;flex-direction:column}
+
+:where(.dashboard-page) .dashboard-overview .map-panel #ulpMap{height:465px;min-height:360px;flex:1}
+
+:where(.dashboard-page) .dashboard-overview .map-panel #ulpMap.leaflet-container{height:465px!important;min-height:360px}
+
+:where(.dashboard-page) .dashboard-overview .dashboard-ranking-panel{display:flex;flex-direction:column}
+
+:where(.dashboard-page) .dashboard-overview .ranking-list{flex:1}
+
+:where(.dashboard-page) .dashboard-overview .ranking-item{padding:9px 9px;gap:6px}
+
+:where(.dashboard-page) .dashboard-overview .ranking-name{font-size:11px}
+
+:where(.dashboard-page) .dashboard-overview .ranking-score{font-size:10px}
+
+:where(.dashboard-page) .dashboard-overview .ranking-number{width:27px;height:27px;flex-shrink:0}
+
+:where(.dashboard-page) .dashboard-overview .ranking-trophy{width:25px;height:25px;flex-shrink:0}
+
+:where(.dashboard-page) .dashboard-overview .ranking-trophy svg{width:15px;height:15px}
+
+:where(.dashboard-page) .dashboard-attention-grid>.dash-panel{margin-bottom:20px}
+
+@media(max-width:1250px){:where(.dashboard-page) .dashboard-overview{grid-template-columns:minmax(0,1.35fr) minmax(290px,1fr)}}
+
+@media(max-width:1050px){:where(.dashboard-page) .dashboard-overview{grid-template-columns:1fr}:where(.dashboard-page) .dashboard-overview .map-panel #ulpMap,:where(.dashboard-page) .dashboard-overview .map-panel #ulpMap.leaflet-container{height:410px!important;min-height:310px}}
+
+@media(max-width:600px){:where(.dashboard-page) .dashboard-overview .map-panel #ulpMap,:where(.dashboard-page) .dashboard-overview .map-panel #ulpMap.leaflet-container{height:340px!important;min-height:300px}}
+
+/* REVISI: peta dan ranking langsung menjadi konten pertama.
+
+   Periode Monitoring mengikuti panel filter di bawah keduanya. */
+
+.dashboard-page > .dashboard-overview { margin-top:0; }
+
+.dashboard-page .filter-layout {
+
+    grid-template-columns:minmax(185px,1.65fr) minmax(115px,.85fr) minmax(100px,.7fr) auto auto;
+
+    align-items:end;
+
+    gap:12px;
+
+}
+
+.dashboard-page .filter-layout .period-label {
+
+    height:43px;
+
+    min-width:177px;
+
+    margin:0;
+
+    padding:6px 11px;
+
+    white-space:nowrap;
+
+    border-radius:9px;
+
+}
+
+.dashboard-page .filter-layout .period-label svg {width:19px;height:19px;flex-shrink:0}
+
+.dashboard-page .filter-layout .period-label small {font-size:10px;line-height:1.2}
+
+.dashboard-page .filter-layout .period-label strong {font-size:12px;line-height:1.3}
+
+@media(max-width:1250px){
+
+  .dashboard-page .filter-layout {grid-template-columns:1.5fr 1fr 1fr auto}
+
+  .dashboard-page .filter-layout .period-label {grid-column:1/-1;justify-self:end}
+
+}
+
+@media(max-width:650px){
+
+  .dashboard-page .filter-layout {grid-template-columns:repeat(2,minmax(0,1fr))}
+
+  .dashboard-page .filter-layout .filter-button {width:100%}
+
+  .dashboard-page .filter-layout .period-label {grid-column:1/-1;justify-self:stretch}
+
+}
+
+/* Penanda klik ULP independen: tidak bergantung pada Leaflet popup/pane. */
+:where(.dashboard-page) #ulpMap .ulp-click-overlay {position:absolute;inset:0;z-index:1100;pointer-events:none;overflow:hidden}
+:where(.dashboard-page) #ulpMap .ulp-click-dot {position:absolute;transform:translate(-50%,-50%);width:27px;height:27px;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 8px #153d5280;cursor:pointer;pointer-events:auto;transition:scale .15s ease}
+:where(.dashboard-page) #ulpMap .ulp-click-dot:hover,:where(.dashboard-page) #ulpMap .ulp-click-dot:focus-visible{scale:1.18;outline:2px solid #125D72;outline-offset:2px}
+:where(.dashboard-page) #ulpMap .ulp-click-info {position:absolute;left:0;top:0;width:235px;max-width:calc(100% - 20px);background:#fff;border:1px solid #b8dce5;border-radius:12px;padding:13px 37px 13px 15px;box-shadow:0 9px 27px #125d7240;pointer-events:auto;color:#125D72;line-height:1.5;z-index:1200;--pointer-x:50%}
+:where(.dashboard-page) #ulpMap .ulp-click-info::after {content:"";position:absolute;left:var(--pointer-x);bottom:-8px;width:14px;height:14px;background:#fff;border-right:1px solid #b8dce5;border-bottom:1px solid #b8dce5;transform:translateX(-50%) rotate(45deg)}
+:where(.dashboard-page) #ulpMap .ulp-click-info.below::after {bottom:auto;top:-8px;transform:translateX(-50%) rotate(225deg)}
+:where(.dashboard-page) #ulpMap .ulp-click-info[hidden],:where(.dashboard-page) #ulpMap .ulp-click-dot[hidden] {display:none!important}
+:where(.dashboard-page) #ulpMap .ulp-click-info strong {display:block;font-size:14px;margin-bottom:6px}
+:where(.dashboard-page) #ulpMap .ulp-click-info small {display:block;font-size:11px;color:#526a79}
+:where(.dashboard-page) #ulpMap .ulp-click-close {position:absolute;top:6px;right:8px;background:#eaf7fa;color:#125D72;border:0;border-radius:7px;cursor:pointer;font-size:19px;width:27px;height:27px;pointer-events:auto}
+
+/* Tombol detail seperti Dashboard ULP */
+.dashboard-page .detail-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 8px 12px;
+    border: 1px solid #b8dde5;
+    border-radius: 8px;
+    background: #fff;
+    color: #125d72;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.dashboard-page .detail-link:hover {
+    background: #e7f6f9;
+    border-color: #125d72;
+    text-decoration: none;
+}
+
+/* Tombol utama */
+.dashboard-page .filter-button {
+    min-height: 40px;
+    padding: 10px 16px;
+    border: 1px solid #125d72;
+    border-radius: 8px;
+    background: #125d72;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.dashboard-page .filter-button:hover {
+    background: #14a2ba;
+    border-color: #14a2ba;
+}
+.dashboard-page .donut-center strong {
+    color: #125d72;
+    text-shadow: none;
+}
+
+.dashboard-page .donut-center small {
+    color: #718096;
+    text-shadow: none;
+}
+/* Tabel ranking admin: seluruh baris tampil tanpa scroll panel */
+#adminDashboard .dashboard-ranking-panel,
+#adminDashboard .dashboard-ranking-table-wrap {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    min-width: 0;
+}
+
+#adminDashboard .dashboard-ranking-table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #125d72;
+}
+
+#adminDashboard .dashboard-ranking-table th,
+#adminDashboard .dashboard-ranking-table td {
+    padding: 15px 10px;
+    text-align: left;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+    border-bottom: 1px solid #e5edf1;
+}
+
+#adminDashboard .dashboard-ranking-table th {
+    background: #e7f6f9;
+    font-weight: 500;
+}
+
+#adminDashboard .dashboard-ranking-table th:nth-child(1) {
+    width: 10%;
+}
+
+#adminDashboard .dashboard-ranking-table th:nth-child(2) {
+    width: 31%;
+}
+
+#adminDashboard .dashboard-ranking-table th:nth-child(3) {
+    width: 39%;
+}
+
+#adminDashboard .dashboard-ranking-table th:nth-child(4) {
+    width: 20%;
+}
+
+#adminDashboard .dashboard-ranking-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#adminDashboard .dashboard-ranking-table .dashboard-ranking-status {
+    color: #718096;
+}
+
+#adminDashboard .dashboard-ranking-table .dashboard-ranking-message {
+    text-align: center;
+    color: #718096;
+}
+/* Peta kantor dan daftar ULP mengikuti Flutter. */
+#adminDashboard .office-marker { background: none; border: 0; }
+#adminDashboard .office-marker span { display: grid; place-items: center; width: 34px; height: 34px; border: 2px solid white; border-radius: 50%; color: white; font-size: 22px; box-shadow: 0 2px 8px #163b4960; }
+#adminDashboard .office-popup { font-family: Inter, sans-serif; font-size: 12px; line-height: 1.6; }
+#adminDashboard .office-popup > strong { display: block; font-size: 15px; color: #125D72; }
+#adminDashboard .office-popup > small { display: block; color: #667984; }
+#adminDashboard .office-popup h4 { margin: 12px 0 3px; font-size: 12px; font-weight: 600; }
+#adminDashboard .office-popup p { margin: 3px 0 9px; }
+#adminDashboard .office-popup a, #adminDashboard .office-popup button { display: block; width: 100%; box-sizing: border-box; text-align: center; padding: 9px 12px; border-radius: 8px; font: inherit; cursor: pointer; margin-top: 8px; }
+#adminDashboard .office-popup a { background: #125D72; color: white; text-decoration: none; }
+#adminDashboard .office-popup button { color: #125D72; border: 1px solid #bddce3; background: #f4fafb; }
+#adminDashboard .office-popup input { max-width: 100%; }
+#adminDashboard .office-chooser-label { font-size: 12px; margin-bottom: 4px; }
+#adminDashboard .office-chooser { width: 100%; padding: 9px 12px; border: 1px solid #cce1e7; background: white; border-radius: 8px; margin-bottom: 12px; color: #125D72; }
+
+#adminDashboard .office-marker { pointer-events: auto !important; cursor: pointer; }
+#adminDashboard .dashboard-ulp-list { display: flex; flex-direction: column; gap: 8px; }
+#adminDashboard .dashboard-ulp-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; min-height: 65px; border: 1px solid #dfebef; border-radius: 12px; background: #fff; }
+#adminDashboard .dashboard-rank-badge { flex: 0 0 40px; display: flex; align-items: center; justify-content: center; flex-direction: column; min-height: 44px; border-radius: 12px; font-size: 14px; font-weight: 600; color: #125d72; }
+#adminDashboard .dashboard-rank-badge svg { width: 24px; height: 24px; }
+#adminDashboard .dashboard-rank-badge small { font-size: 10px; line-height: 1.2; }
+#adminDashboard .dashboard-rank-badge.podium-1 { color: #c39713; background: #fcf5df; }
+#adminDashboard .dashboard-rank-badge.podium-2 { color: #7e8a98; background: #f0f3f6; }
+#adminDashboard .dashboard-rank-badge.podium-3 { color: #ad7548; background: #f8eee6; }
+#adminDashboard .dashboard-ulp-information { flex: 1; min-width: 0; }
+#adminDashboard .dashboard-ulp-information strong { display: block; font-size: 12px; color: #125d72; }
+#adminDashboard .dashboard-ulp-information small { display: block; font-size: 10px; color: #718096; margin-top: 4px; }
+#adminDashboard .dashboard-ulp-score { white-space: nowrap; font-size: 12px; color: #125d72; font-weight: 600; }
+#adminDashboard .dashboard-ranking-message { color: #718096; font-size: 12px; padding: 14px; }
+#adminDashboard #ulpMap:fullscreen { width: 100vw !important; height: 100vh !important; background: #e5f0f4; }
+#adminDashboard #expandOfficeMap { background: white; cursor: pointer; }
+@media (max-width: 600px) { #adminDashboard .dashboard-ulp-row { gap: 8px; padding: 9px; } #adminDashboard .dashboard-ulp-score { font-size: 11px; } }
+
+/* Dashboard: tren dihapus, ringkasan Monitoring mengikuti Flutter. */
+#adminDashboard .dashboard-statistics-only { grid-template-columns: minmax(0, 1fr); }
+#adminDashboard .dashboard-monitoring-list { display: flex; flex-direction: column; }
+#adminDashboard .dashboard-monitoring-row { display: flex; align-items: center; gap: 16px; padding: 15px 0; border-bottom: 1px solid #e2edf1; }
+#adminDashboard .dashboard-monitoring-row:last-child { border-bottom: 0; }
+#adminDashboard .dashboard-monitoring-information { flex: 1; min-width: 0; }
+#adminDashboard .dashboard-monitoring-information strong { display: block; color: #125d72; font-size: 13px; line-height: 1.6; }
+#adminDashboard .dashboard-monitoring-information small { display: block; color: #718096; font-size: 11px; margin-top: 5px; }
+#adminDashboard .dashboard-monitoring-score { flex-shrink: 0; font-size: 14px; }
