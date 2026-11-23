@@ -1,0 +1,233 @@
+    .ul-page {
+        color: #125d72;
+        font-family: 'Inter', Arial, sans-serif;
+    }
+
+    .ul-page * {
+        box-sizing: border-box;
+    }
+
+    .ul-panel {
+        padding: 24px;
+        margin-bottom: 22px;
+        border: 1px solid #dfeaf0;
+        border-radius: 18px;
+        background: #fff;
+    }
+
+    .ul-page h2 {
+        margin: 0 0 12px;
+        font-family: 'Poppins', 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .ul-note {
+        color: #71869a;
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    .ul-filters {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr auto;
+        align-items: end;
+        gap: 18px;
+        margin-top: 20px;
+    }
+
+    .ul-field label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 12px;
+    }
+
+    .ul-field select,
+    .ul-field input,
+    .ul-unit {
+        width: 100%;
+        min-height: 46px;
+        padding: 12px 14px;
+        border: 1px solid #d4e4ec;
+        border-radius: 10px;
+        color: #125d72;
+        background: #fff;
+        font: inherit;
+        font-size: 13px;
+    }
+
+    .ul-unit {
+        background: #f4fafc;
+    }
+
+    .ul-button {
+        min-height: 46px;
+        padding: 12px 20px;
+        border: 0;
+        border-radius: 10px;
+        background: #14a2ba;
+        color: #fff;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .ul-button:disabled {
+        opacity: .5;
+        cursor: default;
+    }
+
+    .ul-tools {
+        display: grid;
+        grid-template-columns: 2fr 1fr auto;
+        align-items: end;
+        gap: 18px;
+        margin-top: 20px;
+    }
+
+    .ul-summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        margin-bottom: 22px;
+    }
+
+    .ul-card {
+        padding: 22px;
+        border-radius: 16px;
+        color: #fff;
+        background: linear-gradient(120deg, #156278, #14a2ba);
+        font-size: 12px;
+    }
+
+    .ul-card strong {
+        display: block;
+        margin-top: 12px;
+        font-size: 30px;
+    }
+
+    .ul-table-wrap {
+        overflow-x: auto;
+        margin-top: 20px;
+    }
+
+    .ul-table {
+        width: 100%;
+        min-width: 1150px;
+        border-collapse: collapse;
+        font-size: 12px;
+    }
+
+    .ul-table th {
+        padding: 14px 12px;
+        text-align: left;
+        background: #e6f5f8;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .ul-table td {
+        padding: 15px 12px;
+        border-bottom: 1px solid #e4edf2;
+        vertical-align: top;
+        line-height: 1.7;
+    }
+
+    .ul-table tr[hidden] {
+        display: none !important;
+    }
+
+    .ul-table .ul-group-start td {
+        border-top: 2px solid #c9e4eb;
+    }
+
+    .ul-code {
+        min-width: 80px;
+        white-space: nowrap;
+        font-weight: 600;
+    }
+
+    .ul-kpi-name {
+        min-width: 230px;
+        max-width: 320px;
+        font-weight: 600;
+    }
+
+    .ul-indicator {
+        min-width: 210px;
+    }
+
+    .ul-indicator-content {
+        display: flex;
+        align-items: baseline;
+        gap: 7px;
+    }
+
+    .ul-entry-number {
+        flex-shrink: 0;
+        min-width: 22px;
+        font-weight: 600;
+    }
+
+    .ul-number {
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .ul-badge {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+    .ul-ok {
+        background: #e4f6e9;
+        color: #237a37;
+    }
+
+    .ul-warn {
+        background: #fff5dc;
+        color: #946200;
+    }
+
+    .ul-bad {
+        background: #fdeaea;
+        color: #b93838;
+    }
+
+    .ul-off {
+        background: #eef4f6;
+        color: #64748b;
+    }
+
+    .ul-empty {
+        padding: 28px !important;
+        text-align: center;
+        color: #71869a;
+    }
+
+    @media (max-width: 1100px) {
+        .ul-filters,
+        .ul-summary {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .ul-tools {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ul-filters,
+        .ul-summary,
+        .ul-tools {
+            grid-template-columns: 1fr;
+        }
+
+        .ul-panel {
+            padding: 18px;
+        }
+    }

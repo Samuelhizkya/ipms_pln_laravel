@@ -37,7 +37,7 @@ class DashboardController extends Controller
         $request->validate([
             'id_ulp' => 'nullable|integer|min:1',
             'id_periode' => 'nullable|integer|min:1',
-            'tahun' => 'nullable|integer|min:2020|max:2100',
+            'tahun' => 'nullable|integer|min:2000|max:2100',
         ]);
 
         $query = RealisasiKpi::query()->with([

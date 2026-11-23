@@ -12,18 +12,68 @@ class TargetKpiImport implements ToCollection, WithHeadingRow
     protected int $idUlp;
     protected int $tahun;
 
-    protected array $errors = [];
-    protected array $validRows = [];
+ protected array $errors = [];
+protected array $validRows = [];
+protected array $warnings = [];
+protected bool $allowMissingBudget;
 
-    public function __construct(int $idUlp, int $tahun)
-    {
-        $this->idUlp = $idUlp;
-        $this->tahun = $tahun;
-    }
+public function __construct(
+    int $idUlp,
+    int $tahun,
+    bool $allowMissingBudget = false
+) {
+    $this->idUlp = $idUlp;
+    $this->tahun = $tahun;
+    $this->allowMissingBudget = $allowMissingBudget;
+}
 
     public function collection(Collection $rows)
-    {
-        $masterKpis = MasterKpi::where('status', 'aktif')->get();
+{
+    if ($rows->isEmpty()) {
+        $this->errors[] =
+            'File tidak memiliki baris data target yang dapat dibaca.';
+
+        return;
+    }
+
+    $firstRow = $rows->first();
+
+    $headerKeys = $firstRow instanceof Collection
+        ? $firstRow->keys()->all()
+        : array_keys((array) $firstRow);
+
+    $requiredHeaders = [
+        'indikator',
+        'target_' . $this->tahun,
+        'sd_jan',
+        'sd_feb',
+        'sd_mar',
+        'sd_apr',
+        'sd_may',
+        'sd_jun',
+        'sd_jul',
+        'sd_aug',
+        'sd_sep',
+        'sd_oct',
+        'sd_nov',
+    ];
+
+    $missingHeaders = array_values(
+        array_diff($requiredHeaders, $headerKeys)
+    );
+
+    if ($missingHeaders !== []) {
+        $this->errors[] =
+            'Struktur kolom Excel tidak sesuai. Kolom yang belum '
+            . 'terbaca: '
+            . implode(', ', $missingHeaders)
+            . '. Pastikan memakai template target yang sesuai dan '
+            . 'tahun pilihan sama dengan judul kolom TARGET.';
+
+        return;
+    }
+
+    $masterKpis = MasterKpi::where('status', 'aktif')->get();
 
         $mapping = [
             'Penjualan Tenaga Listrik'
@@ -62,9 +112,37 @@ class TargetKpiImport implements ToCollection, WithHeadingRow
 
         $kpiMap = [];
 
-        foreach ($masterKpis as $kpi) {
-            $kpiMap[$this->normalize($kpi->nama_kpi)] = $kpi;
-        }
+foreach ($masterKpis as $kpi) {
+    $normalizedName = $this->normalize($kpi->nama_kpi);
+
+    if ($normalizedName === '') {
+        $this->errors[] =
+            'Master KPI dengan kode '
+            . $kpi->kode_kpi
+            . ' belum memiliki nama yang valid.';
+
+        continue;
+    }
+
+    if (isset($kpiMap[$normalizedName])) {
+        $this->errors[] =
+            'Nama Master KPI aktif tidak unik: "'
+            . $kpi->nama_kpi
+            . '". Periksa kode '
+            . $kpiMap[$normalizedName]->kode_kpi
+            . ' dan '
+            . $kpi->kode_kpi
+            . '.';
+
+        continue;
+    }
+
+    $kpiMap[$normalizedName] = $kpi;
+}
+
+if ($this->errors !== []) {
+    return;
+}
 
         /*
          * Target KPI017 dihitung dari tiga komponen:
@@ -75,12 +153,13 @@ class TargetKpiImport implements ToCollection, WithHeadingRow
             'penambahan jtr',
             'penambahan trafo',
         ];
+        $komponenKpi017Terbaca = [];
 
         $totalKpi017 = [
             'jumlah_komponen' => 0,
             'target_tahunan' => 0.0,
             'bulanan' => array_fill_keys(array_keys($bulan), 0.0),
-            'bulan_terisi' => array_fill_keys(array_keys($bulan), false),
+            'bulan_terisi' => array_fill_keys(array_keys($bulan), 0),
         ];
 
         foreach ($rows as $index => $row) {
@@ -97,7 +176,21 @@ class TargetKpiImport implements ToCollection, WithHeadingRow
             /*
              * Proses komponen KPI017.
              */
-            if (in_array($indikator, $komponenKpi017, true)) {
+            // Komponen Excel dapat diawali tanda "-", misalnya "-Penambahan JTM".
+$namaKomponen = ltrim($indikator, "- \t\n\r\0\x0B");
+
+if (in_array($namaKomponen, $komponenKpi017, true)) {
+    if (isset($komponenKpi017Terbaca[$namaKomponen])) {
+        $this->errors[] =
+            "Baris {$barisExcel}: komponen \"{$indikatorAsli}\" "
+            . 'muncul lebih dari sekali. Komponen KPI017 harus '
+            . 'terdiri dari Penambahan JTM, Penambahan JTR, '
+            . 'dan Penambahan Trafo yang masing-masing unik.';
+
+        continue;
+    }
+
+    $komponenKpi017Terbaca[$namaKomponen] = true;
                 if ($targetMentah === null || trim((string) $targetMentah) === '') {
                     continue;
                 }
@@ -148,18 +241,32 @@ class TargetKpiImport implements ToCollection, WithHeadingRow
                     }
 
                     $totalKpi017['bulanan'][$nomorBulan] += $nilai;
-                    $totalKpi017['bulan_terisi'][$nomorBulan] = true;
+                    $totalKpi017['bulan_terisi'][$nomorBulan]++;
                 }
 
                 continue;
             }
 
-            /*
-             * Abaikan baris yang memang tidak memiliki target tahunan.
-             */
-            if ($targetMentah === null || trim((string) $targetMentah) === '') {
-                continue;
-            }
+            if (
+    $targetMentah === null
+    || trim((string) $targetMentah) === ''
+) {
+    foreach ($bulan as $kolom) {
+        $monthlyValue = trim(
+            (string) ($row[$kolom] ?? '')
+        );
+
+        if ($monthlyValue !== '') {
+            $this->errors[] =
+                "Baris {$barisExcel}: {$indikatorAsli} "
+                . 'memiliki target bulanan, tetapi target tahunan kosong.';
+
+            break;
+        }
+    }
+
+    continue;
+}
 
             $targetTahunan = $this->parseTarget(
                 $targetMentah,
@@ -187,9 +294,38 @@ class TargetKpiImport implements ToCollection, WithHeadingRow
 
             $kpi = $kpiMap[$namaMaster] ?? null;
 
-            if (!$kpi) {
-                continue;
-            }
+if (!$kpi) {
+    $budgetNames = [
+        'a. Pengendalian Penggunaan Anggaran Investasi sesuai RKAP',
+        'b. Usulan Penghapusan ATTB',
+        'c. Pengendalian NAC (Non Allowable Cost)',
+    ];
+
+    $normalizedBudgetNames = array_map(
+        fn ($name) => $this->normalize($name),
+        $budgetNames
+    );
+
+    if (
+        $this->allowMissingBudget
+        && in_array($indikator, $normalizedBudgetNames, true)
+    ) {
+        $this->warnings[] =
+            "Baris {$barisExcel}: \"{$indikatorAsli}\" belum diimpor "
+            . 'karena tidak ditemukan pada Master KPI aktif. '
+            . 'Target tahunan dan bulanan pada baris ini tidak disimpan.';
+
+        continue;
+    }
+
+    $this->errors[] =
+        "Baris {$barisExcel}: indikator \"{$indikatorAsli}\" "
+        . 'memiliki target tahunan, tetapi tidak ditemukan '
+        . 'pada Master KPI aktif. Periksa nama indikator, '
+        . 'status Master KPI, dan kesesuaian template.';
+
+    continue;
+}
 
             $nilaiBulanan = [];
 
@@ -230,8 +366,23 @@ class TargetKpiImport implements ToCollection, WithHeadingRow
          * tersedia. Jika ada komponen yang tidak ditemukan, jangan
          * menghasilkan target gabungan yang berpotensi tidak lengkap.
          */
-        if ($totalKpi017['jumlah_komponen'] > 0) {
-            if ($totalKpi017['jumlah_komponen'] !== 3) {
+        if (count($komponenKpi017Terbaca) > 0) {
+            foreach (
+    $totalKpi017['bulan_terisi']
+    as $nomorBulan => $jumlah
+) {
+    if ($jumlah > 0 && $jumlah < 3) {
+        $this->errors[] =
+            "Target KPI017 bulan {$nomorBulan} tidak lengkap. "
+            . 'Isi ketiga komponen JTM, JTR, dan Trafo, '
+            . 'atau kosongkan ketiganya jika belum tersedia. '
+            . 'Gunakan 0 hanya untuk nilai nol.';
+    }
+}
+    if (
+        count($komponenKpi017Terbaca) !== 3
+        || $totalKpi017['jumlah_komponen'] !== 3
+    ) {
                 $this->errors[] =
                     'Target KPI017 belum lengkap. Pastikan komponen Penambahan JTM, Penambahan JTR, dan Penambahan Trafo memiliki TARGET ' .
                     $this->tahun . ' pada template.';
@@ -278,7 +429,7 @@ class TargetKpiImport implements ToCollection, WithHeadingRow
      * Rentang 95-100 hanya diterima untuk indikator
      * Pengendalian Penggunaan Anggaran Investasi sesuai RKAP.
      * Nilai yang disimpan sebagai target numerik adalah 100.
-     * Aturan penilaian khusus diterapkan di KpiCalculationService.
+     * Perhitungan selanjutnya mengikuti service backend yang tersedia.
      */
     protected function parseTarget($value, string $indikator): ?float
     {
@@ -306,10 +457,16 @@ class TargetKpiImport implements ToCollection, WithHeadingRow
         }
 
         if (!is_numeric($teks)) {
-            return null;
-        }
+    return null;
+}
 
-        return (float) $teks;
+$nilai = (float) $teks;
+
+if (!is_finite($nilai)) {
+    return null;
+}
+
+return $nilai;
     }
 
     protected function normalize($value): string
@@ -329,4 +486,8 @@ class TargetKpiImport implements ToCollection, WithHeadingRow
     {
         return $this->validRows;
     }
+    public function getWarnings(): array
+{
+    return $this->warnings;
+}
 }

@@ -1,0 +1,379 @@
+.rk-page {
+    --deep: #125d72;
+    --cyan: #14a2ba;
+    --muted: #64748b;
+    --line: #dfeaf0;
+
+    font-family: 'Inter', Arial, sans-serif;
+    color: #263f4e;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding-bottom: 35px;
+}
+
+.rk-page * {
+    box-sizing: border-box;
+}
+
+.rk-page h2,
+.rk-page h3,
+.rk-page button {
+    font-family: 'Poppins', 'Inter', sans-serif;
+}
+
+.rk-panel {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 22px;
+    box-shadow: 0 5px 18px rgba(18, 93, 114, .035);
+    min-width: 0;
+}
+
+.rk-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 18px;
+    color: var(--deep);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.rk-title svg {
+    width: 21px;
+    height: 21px;
+    color: var(--cyan);
+    flex-shrink: 0;
+}
+
+.rk-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.rk-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--deep);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.rk-field select,
+.rk-search {
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 14px;
+    border: 1px solid #d4e4ec;
+    border-radius: 10px;
+    background: #fff;
+    color: #34495a;
+    font: inherit;
+    font-size: 13px;
+}
+
+.rk-field select:focus,
+.rk-search:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(20, 162, 186, .13);
+}
+
+.rk-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+/* Tombol utama mengikuti Impor Excel pada Realisasi KPI. */
+.rk-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 40px;
+    padding: 10px 16px;
+
+    border: 1px solid #125d72;
+    border-radius: 8px;
+
+    background: #125d72;
+    color: #fff;
+
+    font-family: var(--font-utama, 'Poppins', sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition:
+        background-color 150ms ease,
+        border-color 150ms ease,
+        color 150ms ease;
+}
+
+.rk-btn:hover:not(:disabled) {
+    background: #14a2ba;
+    border-color: #14a2ba;
+    color: #fff;
+}
+
+.rk-btn:active:not(:disabled) {
+    background: #125d72;
+    border-color: #125d72;
+}
+
+/* Reset mengikuti tombol Download pada Realisasi KPI. */
+.rk-btn.rk-btn-alt {
+    background: #e7f6f9;
+    border-color: #b8dde5;
+    color: #125d72;
+}
+
+.rk-btn.rk-btn-alt:hover {
+    background: #d5edf2;
+    border-color: #125d72;
+    color: #125d72;
+}
+
+.rk-btn.rk-btn-alt:active {
+    background: #c9e7ed;
+    border-color: #125d72;
+}
+
+.rk-btn:focus-visible {
+    outline: 2px solid #14a2ba;
+    outline-offset: 2px;
+}
+
+.rk-btn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.rk-note {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.rk-podium {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    gap: 18px;
+}
+
+.rk-winner {
+    min-width: 0;
+    padding: 26px 16px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    text-align: center;
+}
+
+.rk-winner.first {
+    min-height: 260px;
+    background: linear-gradient(180deg, #fff9e9, #fff 62%);
+    border-color: #f2d78c;
+}
+
+.rk-winner.second {
+    min-height: 230px;
+    background: linear-gradient(180deg, #edf1f5, #fff 62%);
+    border-color: #c5ced9;
+}
+
+.rk-winner.third {
+    min-height: 230px;
+    background: linear-gradient(180deg, #f7e4d6, #fff 62%);
+    border-color: #ddb598;
+}
+
+.rk-medal {
+    display: grid;
+    place-items: center;
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+}
+
+.rk-medal svg {
+    width: 30px;
+    height: 30px;
+}
+
+.rk-winner.first .rk-medal {
+    background: #fff0bb;
+    color: #b78300;
+}
+
+.rk-winner.second .rk-medal {
+    background: #edf1f5;
+    color: #7b8798;
+}
+
+.rk-winner.third .rk-medal {
+    background: #f7e4d6;
+    color: #ad7049;
+}
+
+.rk-position {
+    margin-bottom: 10px;
+    color: var(--deep);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.rk-winner h3 {
+    margin: 0 0 12px;
+    color: var(--deep);
+    font-size: 17px;
+    overflow-wrap: anywhere;
+}
+
+.rk-score {
+    color: var(--deep);
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.rk-score-label {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.rk-flex-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.rk-flex-head .rk-title {
+    margin: 0;
+}
+
+.rk-search {
+    width: 260px;
+    max-width: 100%;
+}
+
+.rk-table-wrap {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.rk-table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.rk-table th {
+    padding: 15px 16px;
+    text-align: left;
+    background: #e6f5f8;
+    color: var(--deep);
+    font-weight: 600;
+}
+
+.rk-table td {
+    padding: 18px 16px;
+    border-bottom: 1px solid #e7eef2;
+    color: #465a6d;
+    vertical-align: middle;
+}
+
+.rk-table tbody tr:hover {
+    background: #f5fafc;
+}
+
+.rk-table .rk-own-row {
+    background: #f0fafc;
+}
+
+.rk-unit {
+    color: var(--deep);
+    font-weight: 600;
+}
+
+.rk-status-neutral {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #dff3f7;
+    color: var(--deep);
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.rk-empty {
+    padding: 28px !important;
+    text-align: center;
+    color: var(--muted);
+}
+
+.rk-tablefoot {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.rk-hidden {
+    display: none !important;
+}
+
+@media (max-width: 700px) {
+    .rk-panel {
+        padding: 18px;
+    }
+
+    .rk-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .rk-podium {
+        grid-template-columns: 1fr;
+    }
+
+    .rk-winner.first {
+        order: -1;
+    }
+
+    .rk-winner.first,
+    .rk-winner.second,
+    .rk-winner.third {
+        min-height: auto;
+    }
+
+    .rk-search {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rk-btn {
+        transition: none;
+    }
+}

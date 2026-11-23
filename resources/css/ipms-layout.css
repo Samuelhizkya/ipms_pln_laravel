@@ -1,0 +1,802 @@
+/* Layout halaman setelah login */
+
+.ipms-app {
+    --sidebar-width: 240px;
+    --topbar-height: 88px;
+
+    background: #E7F6F9;
+    color: #173447;
+    font-family: 'Inter', sans-serif;
+}
+
+.ipms-app .app-container {
+    min-height: 100vh;
+}
+
+.ipms-app .main-area {
+    min-width: 0;
+    margin-left: var(--sidebar-width);
+}
+
+.ipms-app .page-content {
+    padding: 24px;
+}
+
+.ipms-skip-link {
+    position: fixed;
+    top: -100px;
+    left: 16px;
+    z-index: 100;
+    padding: 10px 16px;
+    border-radius: 6px;
+    background: #FFFFFF;
+    color: #005B94;
+}
+
+.ipms-skip-link:focus {
+    top: 10px;
+}
+
+/* Sidebar */
+
+.ipms-app .ipms-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-width);
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    background: #125D72;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+}
+
+.ipms-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 80px;
+    padding: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.ipms-brand-logo {
+    width: 50px;
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.ipms-brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.ipms-brand-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.ipms-brand-unit {
+    margin-top: 2px;
+    color: #D5EDF2;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.ipms-navigation {
+    padding: 20px 10px;
+}
+
+.ipms-menu-list {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ipms-menu-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 11px 10px;
+    border-radius: 7px;
+    color: #E5F4F7;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.ipms-menu-link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.ipms-menu-link:hover {
+    background: rgba(255, 255, 255, 0.10);
+}
+
+.ipms-menu-link.is-active {
+    background: #14A2BA;
+    color: #FFFFFF;
+}
+
+.ipms-sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: auto;
+    padding: 20px 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    color: #C2E0E7;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+}
+
+/* Navbar */
+
+.ipms-app .ipms-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: var(--topbar-height);
+    padding: 8px 24px;
+    background: #FFFFFF;
+    color: #FFFFFF;
+}
+
+.ipms-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.ipms-page-name {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.ipms-icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+}
+
+.ipms-icon-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.ipms-menu-toggle {
+    display: none;
+}
+
+/* Profil */
+
+.ipms-profile {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.ipms-profile-trigger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.ipms-profile-trigger::-webkit-details-marker {
+    display: none;
+}
+
+.ipms-profile-text {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.ipms-profile-name {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ipms-profile-role {
+    color: #D2E9EE;
+    font-size: 10px;
+}
+
+.ipms-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #E7F6F9;
+    color: #125D72;
+    font-family: var(--font-utama);
+    font-weight: 600;
+}
+
+.ipms-profile-chevron {
+    width: 14px;
+    height: 14px;
+}
+
+.ipms-profile-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: min(260px, calc(100vw - 32px));
+    overflow: hidden;
+    border: 1px solid #DDE4EA;
+    border-radius: 10px;
+    background: #FFFFFF;
+    color: #334155;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.15);
+}
+
+.ipms-dropdown-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #E8EDF2;
+    overflow-wrap: anywhere;
+}
+
+.ipms-dropdown-heading strong {
+    font-size: 13px;
+}
+
+.ipms-dropdown-heading span {
+    color: #64748B;
+    font-size: 12px;
+}
+
+.ipms-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 13px 16px;
+    border: 0;
+    background: #FFFFFF;
+    color: #334155;
+    font-size: 13px;
+    text-align: left;
+    text-decoration: none;
+}
+
+.ipms-dropdown-item svg {
+    width: 17px;
+    height: 17px;
+}
+
+.ipms-dropdown-item:hover {
+    background: #F4F6F9;
+}
+
+.ipms-dropdown-logout {
+    color: #B91C1C;
+}
+
+/* Komponen dasar halaman */
+
+.ipms-app .card {
+    padding: 20px;
+    border: 1px solid #DDE4EA;
+    border-radius: 10px;
+    background: #FFFFFF;
+}
+
+.ipms-app .page-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ipms-app .page-content th {
+    padding: 12px;
+    background: #E7F6F9;
+    color: #125D72;
+    font-family: var(--font-utama);
+    font-size: 12px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.ipms-app .page-content td {
+    padding: 12px;
+    border-bottom: 1px solid #E8EDF2;
+    font-size: 12px;
+}
+
+.ipms-app .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.45);
+}
+
+.ipms-app .modal {
+    width: min(500px, 100%);
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    padding: 24px;
+    border-radius: 12px;
+    background: #FFFFFF;
+}
+
+.ipms-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    border: 0;
+    background: rgba(15, 23, 42, 0.45);
+}
+
+/* Layar kecil */
+
+@media (max-width: 900px) {
+    .ipms-app .main-area {
+        margin-left: 0;
+    }
+
+    .ipms-app .ipms-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .ipms-app.sidebar-open .ipms-sidebar {
+        transform: translateX(0);
+    }
+
+    .ipms-app.sidebar-open {
+        overflow: hidden;
+    }
+
+    .ipms-menu-toggle {
+        display: inline-flex;
+    }
+
+    .ipms-app .ipms-topbar {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .ipms-app .page-content {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .ipms-profile-text {
+        display: none;
+    }
+
+    .ipms-page-name {
+        font-size: 13px;
+    }
+}
+/* Navbar putih dengan teks yang terbaca */
+.ipms-app .ipms-topbar {
+    background: #FFFFFF;
+    color: #17324D;
+    border-bottom: 1px solid #E3E9EF;
+}
+
+.ipms-app .ipms-page-name {
+    color: #17324D;
+}
+
+.ipms-app .ipms-profile-trigger {
+    color: #17324D;
+    min-height: 40px;
+}
+
+.ipms-app .ipms-profile-text {
+    text-align: left;
+}
+
+.ipms-app .ipms-profile-name {
+    color: #17324D;
+    font-family: var(--font-utama);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ipms-app .ipms-profile-role {
+    color: #526579;
+    font-family: var(--font-data);
+    font-size: 10px;
+}
+
+.ipms-app .ipms-profile-chevron {
+    color: #005B94;
+}
+
+.ipms-app .ipms-avatar {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    background: #E7F6F9;
+    color: #005B94;
+}
+
+.ipms-app .ipms-icon-button {
+    color: #005B94;
+}
+
+.ipms-app .ipms-icon-button:hover {
+    background: #EDF6FC;
+}
+
+/* Logo diperbesar dari 50px menjadi 64px */
+.ipms-app .ipms-brand {
+    gap: 10px;
+    padding: 18px 12px;
+    min-height: 88px;
+}
+
+.ipms-app .ipms-brand-logo {
+    width: 64px;
+    height: auto;
+    max-width: none;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.ipms-app .ipms-brand-text {
+    min-width: 0;
+}
+
+.ipms-app .ipms-brand-name {
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.ipms-app .ipms-brand-unit {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================
+   KOMPATIBILITAS TAMPILAN DASHBOARD ADMIN
+   ========================================= */
+
+/* Menyembunyikan judul lama agar tidak
+   bertabrakan dengan judul navbar */
+.main-content .dashboard-heading > div:first-child,
+.main-content .mon-heading > div:first-child,
+.main-content .st-heading > div:first-child,
+.main-content .rk-heading > div:first-child {
+    display: none !important;
+}
+
+/* Merapikan posisi informasi periode */
+.main-content .dashboard-heading,
+.main-content .mon-heading,
+.main-content .st-heading,
+.main-content .rk-heading {
+    justify-content: flex-end;
+}
+
+/* Dropdown filter bersama. */
+.ipms-select-wrap {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+.ipms-select-native {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+}
+
+.ipms-select-trigger {
+    width: 100%;
+    min-height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 14px;
+    border: 1px solid #D5E4EB;
+    border-radius: 9px;
+    background: #fff;
+    color: #344D5D;
+    font: 13px Inter, Arial, sans-serif;
+    text-align: left;
+    cursor: pointer;
+}
+
+.ipms-select-trigger span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ipms-select-trigger::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #365068;
+    border-bottom: 2px solid #365068;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    margin: -4px 2px 0 0;
+}
+
+.ipms-select-trigger:focus-visible,
+.ipms-select-trigger[aria-expanded="true"] {
+    outline: none;
+    border-color: #14A2BA;
+    box-shadow: 0 0 0 3px #14A2BA20;
+}
+
+.ipms-select-trigger:disabled {
+    background: #F1F5F9;
+    color: #94A3B8;
+    cursor: not-allowed;
+}
+
+.ipms-select-popup {
+    position: fixed;
+    z-index: 100000;
+    padding: 8px;
+    border: 1px solid #D5E4EB;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 12px 32px #19374726;
+    color: #344D5D;
+    font: 13px Inter, Arial, sans-serif;
+}
+
+.ipms-select-search {
+    display: block;
+    width: 100%;
+    height: 38px;
+    margin-bottom: 7px;
+    padding: 8px 11px;
+    border: 1px solid #D5E4EB;
+    border-radius: 8px;
+    background: #F8FCFD;
+    color: #344D5D;
+    font: inherit;
+    outline: none;
+}
+
+.ipms-select-search:focus {
+    border-color: #14A2BA;
+}
+
+.ipms-select-options {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #B8DDE5 #F1F7F9;
+}
+
+.ipms-select-option {
+    display: block;
+    width: 100%;
+    margin: 2px 0;
+    padding: 11px 12px;
+    border: 0;
+    border-radius: 7px;
+    background: #fff;
+    color: #344D5D;
+    font: inherit;
+    line-height: 1.5;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+}
+
+.ipms-select-option:hover,
+.ipms-select-option:focus-visible {
+    background: #E7F6F9;
+    color: #125D72;
+    outline: none;
+}
+
+.ipms-select-option.is-selected {
+    background: #14A2BA;
+    color: #fff;
+    font-weight: 600;
+}
+
+.ipms-select-option:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.ipms-select-empty {
+    padding: 12px;
+    color: #718096;
+    text-align: center;
+}
+
+/* =========================================
+   TOMBOL AKSI BERSAMA
+   ========================================= */
+
+/* Tombol utama dan tombol tambahan */
+.ipms-app :is(
+    .ipms-action-primary,
+    .ipms-action-secondary,
+    .ul-button
+) {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 42px;
+    padding: 10px 18px !important;
+
+    border: 1px solid transparent !important;
+    border-radius: 8px !important;
+
+    font-family: 'Inter', Arial, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none !important;
+
+    cursor: pointer;
+
+    box-shadow: none !important;
+    transform: translateY(0);
+
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
+
+/* Tampilan 1: toska gelap */
+.ipms-app :is(
+    .ipms-action-primary,
+    .ul-button
+) {
+    background: #125d72 !important;
+    border-color: #125d72 !important;
+    color: #ffffff !important;
+}
+
+/* Tampilan 2: putih dengan garis tepi */
+.ipms-app .ipms-action-secondary {
+    background: #ffffff !important;
+    border-color: #d7e0e7 !important;
+    color: #344d5d !important;
+}
+
+/* Bayangan saat kursor diarahkan */
+@media (hover: hover) {
+    .ipms-app :is(
+        .ipms-action-primary,
+        .ul-button
+    ):not(:disabled):not([aria-disabled="true"]):hover {
+        background: #0e5062 !important;
+        border-color: #0e5062 !important;
+
+        box-shadow:
+            0 5px 12px rgba(18, 93, 114, 0.22) !important;
+
+        transform: translateY(-1px);
+    }
+
+    .ipms-app .ipms-action-secondary:not(:disabled):not(
+        [aria-disabled="true"]
+    ):hover {
+        background: #f7fbfc !important;
+        border-color: #a8c5ce !important;
+
+        box-shadow:
+            0 5px 12px rgba(23, 52, 71, 0.12) !important;
+
+        transform: translateY(-1px);
+    }
+}
+
+/* Penanda fokus saat menggunakan keyboard */
+.ipms-app :is(
+    .ipms-action-primary,
+    .ipms-action-secondary,
+    .ul-button
+):focus-visible {
+    outline: 3px solid rgba(20, 162, 186, 0.35);
+    outline-offset: 3px;
+}
+
+/* Efek saat tombol ditekan */
+.ipms-app :is(
+    .ipms-action-primary,
+    .ipms-action-secondary,
+    .ul-button
+):not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(1px);
+
+    box-shadow:
+        0 1px 3px rgba(18, 93, 114, 0.16) !important;
+}
+
+/* Tombol yang tidak dapat digunakan */
+.ipms-app :is(
+    .ipms-action-primary,
+    .ipms-action-secondary,
+    .ul-button
+):is(:disabled, [aria-disabled="true"]) {
+    opacity: .5 !important;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Ukuran ikon di dalam tombol */
+.ipms-app :is(
+    .ipms-action-primary,
+    .ipms-action-secondary,
+    .ul-button
+) svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* Mengikuti pengaturan pengurangan animasi */
+@media (prefers-reduced-motion: reduce) {
+    .ipms-app :is(
+        .ipms-action-primary,
+        .ipms-action-secondary,
+        .ul-button
+    ) {
+        transition: none !important;
+        transform: none !important;
+    }
+}

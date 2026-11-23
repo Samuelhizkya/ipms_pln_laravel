@@ -1,11 +1,63 @@
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+:root {
+    --sidebar-width: 240px;
+    --sidebar-bg: #125D72;
+    --sidebar-hover: #14A2BA;
+    --page-bg: #E7F6F9;
+    --card-bg: #FFFFFF;
+    --text-main: #173447;
+    --text-soft: #64748B;
+    --border-soft: #D7EAF0;
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-utama: 'Poppins', sans-serif;
+    --font-data: 'Inter', sans-serif;
+}
+
+/* RESET DASAR */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body,
+body.ipms-app {
+    font-family: var(--font-data);
+    background: var(--page-bg);
+    color: var(--text-main);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-utama);
+}
+
+/* FONT DASAR KOMPONEN */
+button,
+input,
+select,
+textarea {
+    font-family: var(--font-data);
+}
+
+/* Standar tipografi tim. Hanya font; warna dan susunan halaman tetap. */
+table, td, p, small, label {
+    font-family: var(--font-data);
+}
+th {
+    font-family: var(--font-utama);
+}
+td {
+    font-variant-numeric: tabular-nums;
 }
